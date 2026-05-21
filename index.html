@@ -1,161 +1,68 @@
-<!-- ===================================================== -->
-<!-- index.html -->
-<!-- ===================================================== -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ReBuilted Games</title>
-
-<meta name="theme-color" content="#050505">
-<meta name="description" content="Official ReBuilted Games Website">
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReBuilted Games</title>
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="Official ReBuilted Games Website">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="background"></div>
 
-<div class="background"></div>
-
-<!-- SIDEBAR -->
-
-<div class="sidebar">
-
-    <div class="logo">
-        REBUILTED<br>GAMES
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">
+            REBUILTED<br>GAMES
+        </div>
+        <div class="creator">
+            BY <a href="https://www.roblox.com/users/1519939877/profile#!/about" target="_blank">TAILSTHEHERO10</a>
+        </div>
+        <div class="nav">
+            <button data-scroll="homeSection">HOME</button>
+            <button data-scroll="gamesSection">GAMES</button>
+            <button data-scroll="aboutSection">ABOUT</button>
+            <button onclick="window.open('https://www.roblox.com/communities/223811537/ReBuilted-Games','_blank')">GROUP</button>
+        </div>
+        <div class="version">
+            REBUILTED GAMES © 2026
+        </div>
     </div>
 
-    <div class="creator">
-        BY
-        <a
-        href="https://www.roblox.com/users/1519939877/profile#!/about"
-        target="_blank">
-            TAILSTHEHERO10
-        </a>
-    </div>
+    <!-- MAIN -->
+    <div class="main">
+        <!-- HERO -->
+        <section class="hero" id="homeSection">
+            <h1>WELCOME TO<br>REBUILTED GAMES</h1>
+            <p>Building immersive Roblox experiences.</p>
+            <div class="heroButtons">
+                <button data-scroll="gamesSection">VIEW GAMES</button>
+                <button onclick="window.open('https://www.roblox.com/communities/223811537/ReBuilted-Games','_blank')">JOIN GROUP</button>
+            </div>
+        </section>
 
-    <div class="nav">
-
-        <button data-scroll="homeSection">
-            HOME
-        </button>
-
-        <button data-scroll="gamesSection">
-            GAMES
-        </button>
-
-        <button data-scroll="aboutSection">
-            ABOUT
-        </button>
-
-        <button onclick="
-        window.open(
-        'https://www.roblox.com/communities/223811537/ReBuilted-Games',
-        '_blank'
-        )">
-            GROUP
-        </button>
-
-    </div>
-
-    <div class="version">
-        REBUILTED GAMES © 2026
-    </div>
-
-</div>
-
-<!-- MAIN -->
-
-<div class="main">
-
-    <!-- HERO -->
-
-    <section class="hero" id="homeSection">
-
-        <h1>
-            WELCOME TO<br>
-            REBUILTED GAMES
-        </h1>
-
-        <p>
-            Building immersive Roblox experiences.
-        </p>
-
-        <div class="heroButtons">
-
-            <button
-            data-scroll="gamesSection">
-                VIEW GAMES
-            </button>
-
-            <button onclick="
-            window.open(
-            'https://www.roblox.com/communities/223811537/ReBuilted-Games',
-            '_blank'
-            )">
-                JOIN GROUP
-            </button>
-
+        <!-- SEARCH -->
+        <div class="searchContainer">
+            <input id="searchInput" type="text" placeholder="Search games...">
         </div>
 
-    </section>
+        <!-- GAMES -->
+        <section id="gamesSection">
+            <h2 class="sectionTitle">GAMES</h2>
+            <div class="gamesGrid" id="gamesGrid"></div>
+        </section>
 
-    <!-- SEARCH -->
-
-    <div class="searchContainer">
-
-        <input
-        id="searchInput"
-        type="text"
-        placeholder="Search games...">
-
+        <!-- ABOUT -->
+        <section class="aboutSection" id="aboutSection">
+            <h2 class="sectionTitle">ABOUT</h2>
+            <p>
+                ReBuilted Games is a Roblox development studio focused on immersive experiences, 
+                futuristic systems and cinematic gameplay.
+            </p>
+        </section>
     </div>
 
-    <!-- GAMES -->
-
-    <section id="gamesSection">
-
-        <h2 class="sectionTitle">
-            GAMES
-        </h2>
-
-        <div
-        class="gamesGrid"
-        id="gamesGrid">
-
-        </div>
-
-    </section>
-
-    <!-- ABOUT -->
-
-    <section
-    class="aboutSection"
-    id="aboutSection">
-
-        <h2 class="sectionTitle">
-            ABOUT
-        </h2>
-
-        <p>
-            ReBuilted Games is a Roblox
-            development studio focused on
-            immersive experiences,
-            futuristic systems and cinematic
-            gameplay.
-        </p>
-
-    </section>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
