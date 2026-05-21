@@ -1,5 +1,10 @@
+<!-- ===================================================== -->
+<!-- index.html -->
+<!-- ===================================================== -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -13,9 +18,12 @@
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
 <div class="background"></div>
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -25,33 +33,50 @@
 
     <div class="creator">
         BY
-        <a href="https://www.roblox.com/users/1519939877/profile#!/about" target="_blank">
+        <a
+        href="https://www.roblox.com/users/1519939877/profile#!/about"
+        target="_blank">
             TAILSTHEHERO10
         </a>
     </div>
 
     <div class="nav">
-        <button>HOME</button>
-        <button>GAMES</button>
-        <button>ABOUT</button>
 
-        <button onclick="window.open(
+        <button data-scroll="homeSection">
+            HOME
+        </button>
+
+        <button data-scroll="gamesSection">
+            GAMES
+        </button>
+
+        <button data-scroll="aboutSection">
+            ABOUT
+        </button>
+
+        <button onclick="
+        window.open(
         'https://www.roblox.com/communities/223811537/ReBuilted-Games',
         '_blank'
         )">
             GROUP
         </button>
+
     </div>
 
     <div class="version">
-        VERSION 1.0
+        REBUILTED GAMES © 2026
     </div>
 
 </div>
 
+<!-- MAIN -->
+
 <div class="main">
 
-    <section class="hero">
+    <!-- HERO -->
+
+    <section class="hero" id="homeSection">
 
         <h1>
             WELCOME TO<br>
@@ -62,19 +87,71 @@
             Building immersive Roblox experiences.
         </p>
 
-    </section>
+        <div class="heroButtons">
 
-    <h2 class="gamesTitle">
-        GAMES
-    </h2>
+            <button
+            data-scroll="gamesSection">
+                VIEW GAMES
+            </button>
 
-    <div class="gamesGrid" id="gamesGrid">
+            <button onclick="
+            window.open(
+            'https://www.roblox.com/communities/223811537/ReBuilted-Games',
+            '_blank'
+            )">
+                JOIN GROUP
+            </button>
 
-        <div class="loading">
-            LOADING GAMES...
         </div>
 
+    </section>
+
+    <!-- SEARCH -->
+
+    <div class="searchContainer">
+
+        <input
+        id="searchInput"
+        type="text"
+        placeholder="Search games...">
+
     </div>
+
+    <!-- GAMES -->
+
+    <section id="gamesSection">
+
+        <h2 class="sectionTitle">
+            GAMES
+        </h2>
+
+        <div
+        class="gamesGrid"
+        id="gamesGrid">
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section
+    class="aboutSection"
+    id="aboutSection">
+
+        <h2 class="sectionTitle">
+            ABOUT
+        </h2>
+
+        <p>
+            ReBuilted Games is a Roblox
+            development studio focused on
+            immersive experiences,
+            futuristic systems and cinematic
+            gameplay.
+        </p>
+
+    </section>
 
 </div>
 
