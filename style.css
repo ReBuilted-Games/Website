@@ -1,8 +1,20 @@
+/* ===================================================== */
+/* style.css */
+/* ===================================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -11,40 +23,66 @@ body{
     overflow-x:hidden;
 }
 
+/* ===================================================== */
 /* BACKGROUND */
+/* ===================================================== */
 
 .background{
     position:fixed;
     inset:0;
+
     z-index:-1;
 
     background:
     linear-gradient(
         120deg,
-        #0a0a0a 0%,
-        #111111 40%,
-        #050505 100%
+        #050505,
+        #0d0d0d,
+        #050505
     );
 }
 
 .background::before{
     content:"";
+
     position:absolute;
-    left:-200px;
-    top:-100px;
 
-    width:500px;
-    height:140%;
+    left:-250px;
+    top:-150px;
 
-    background:rgba(255,255,255,0.03);
+    width:600px;
+    height:160%;
 
-    transform:rotate(10deg);
+    background:
+    rgba(255,255,255,0.03);
+
+    transform:rotate(12deg);
 }
 
+.background::after{
+    content:"";
+
+    position:absolute;
+
+    left:250px;
+    top:-100px;
+
+    width:300px;
+    height:160%;
+
+    background:
+    rgba(255,255,255,0.02);
+
+    transform:rotate(12deg);
+}
+
+/* ===================================================== */
 /* SIDEBAR */
+/* ===================================================== */
 
 .sidebar{
     position:fixed;
+
     left:0;
     top:0;
 
@@ -53,6 +91,9 @@ body{
 
     padding:30px;
 
+    border-right:
+    1px solid rgba(255,255,255,0.05);
+
     backdrop-filter:blur(4px);
 }
 
@@ -60,6 +101,7 @@ body{
     font-size:58px;
     font-weight:900;
     line-height:0.9;
+
     margin-bottom:20px;
 }
 
@@ -83,13 +125,15 @@ body{
 .nav button{
     width:100%;
 
-    background:rgba(255,255,255,0.04);
+    background:
+    rgba(255,255,255,0.04);
 
-    border:1px solid rgba(255,255,255,0.05);
+    border:
+    1px solid rgba(255,255,255,0.05);
 
     color:white;
 
-    font-size:30px;
+    font-size:28px;
     font-weight:700;
 
     padding:18px;
@@ -98,31 +142,42 @@ body{
 
     cursor:pointer;
 
-    transition:0.25s ease;
+    transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 .nav button:hover{
     transform:translateY(-2px);
 
-    background:rgba(255,255,255,0.08);
+    border-color:
+    rgba(0,170,255,0.4);
 
-    border-color:rgba(0,170,255,0.5);
+    background:
+    rgba(255,255,255,0.08);
 }
 
 .version{
     position:absolute;
     bottom:30px;
+
     color:#666;
+    font-size:14px;
 }
 
+/* ===================================================== */
 /* MAIN */
+/* ===================================================== */
 
 .main{
     margin-left:340px;
     padding:40px;
 }
 
+/* ===================================================== */
 /* HERO */
+/* ===================================================== */
 
 .hero{
     margin-bottom:60px;
@@ -131,20 +186,91 @@ body{
 .hero h1{
     font-size:72px;
     line-height:0.9;
+
     margin-bottom:20px;
 }
 
 .hero p{
     color:#888;
     font-size:22px;
+
+    max-width:700px;
 }
 
-/* GAMES */
+.heroButtons{
+    margin-top:30px;
 
-.gamesTitle{
-    font-size:40px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.heroButtons button{
+    background:#0d0d0d;
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
+    color:white;
+
+    padding:16px 24px;
+
+    border-radius:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+}
+
+.heroButtons button:hover{
+    transform:translateY(-2px);
+
+    border-color:
+    rgba(0,170,255,0.4);
+}
+
+/* ===================================================== */
+/* SEARCH */
+/* ===================================================== */
+
+.searchContainer{
+    margin-bottom:30px;
+}
+
+.searchContainer input{
+    width:100%;
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    outline:none;
+
+    font-size:18px;
+}
+
+/* ===================================================== */
+/* TITLES */
+/* ===================================================== */
+
+.sectionTitle{
+    font-size:42px;
     margin-bottom:25px;
 }
+
+/* ===================================================== */
+/* GAMES */
+/* ===================================================== */
 
 .gamesGrid{
     display:grid;
@@ -156,7 +282,8 @@ body{
 }
 
 .gameCard{
-    background:rgba(255,255,255,0.04);
+    background:
+    rgba(255,255,255,0.04);
 
     border:
     1px solid rgba(255,255,255,0.05);
@@ -165,19 +292,21 @@ body{
 
     overflow:hidden;
 
-    transition:0.25s ease;
+    transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .gameCard:hover{
     transform:translateY(-5px);
 
     border-color:
-    rgba(0,170,255,0.5);
+    rgba(0,170,255,0.4);
 }
 
 .gameThumb{
     width:100%;
-    height:180px;
+    height:190px;
 
     object-fit:cover;
 
@@ -191,19 +320,35 @@ body{
 .gameName{
     font-size:28px;
     font-weight:800;
-    margin-bottom:15px;
+
+    margin-bottom:10px;
+}
+
+.gameDescription{
+    color:#888;
+
+    margin-bottom:20px;
+
+    line-height:1.5;
 }
 
 .stats{
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+    1fr 1fr;
+
     gap:12px;
-    margin-bottom:18px;
+
+    margin-bottom:20px;
 }
 
 .stat{
-    background:rgba(255,255,255,0.03);
+    background:
+    rgba(255,255,255,0.03);
+
     padding:12px;
+
     border-radius:12px;
 }
 
@@ -214,12 +359,10 @@ body{
 
 .statValue{
     font-weight:bold;
-    margin-top:4px;
+    margin-top:5px;
 }
 
 .playButton{
-    width:100%;
-
     display:block;
 
     text-align:center;
@@ -243,23 +386,163 @@ body{
     transform:translateY(-2px);
 }
 
-.loading{
-    color:#888;
-    font-size:24px;
+/* ===================================================== */
+/* SKELETONS */
+/* ===================================================== */
+
+.skeletonCard{
+    overflow:hidden;
 }
 
+.skeletonThumb,
+.skeletonText,
+.skeletonStat,
+.skeletonButton{
+    background:
+    linear-gradient(
+        90deg,
+        #111,
+        #1b1b1b,
+        #111
+    );
+
+    background-size:200% 100%;
+
+    animation:skeleton 1.2s infinite linear;
+}
+
+.skeletonThumb{
+    height:190px;
+}
+
+.skeletonText{
+    height:30px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.skeletonStat{
+    height:60px;
+    border-radius:12px;
+}
+
+.skeletonButton{
+    height:50px;
+    border-radius:14px;
+}
+
+@keyframes skeleton{
+    0%{
+        background-position:200% 0;
+    }
+
+    100%{
+        background-position:-200% 0;
+    }
+}
+
+/* ===================================================== */
+/* ERROR */
+/* ===================================================== */
+
+.errorCard{
+    background:
+    rgba(255,0,0,0.05);
+
+    border:
+    1px solid rgba(255,0,0,0.2);
+
+    padding:30px;
+
+    border-radius:24px;
+}
+
+.errorCard button{
+    margin-top:20px;
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+/* ===================================================== */
+/* ABOUT */
+/* ===================================================== */
+
+.aboutSection{
+    margin-top:80px;
+}
+
+.aboutSection p{
+    color:#888;
+    line-height:1.8;
+    max-width:700px;
+}
+
+/* ===================================================== */
+/* ANIMATION */
+/* ===================================================== */
+
+.fadeIn{
+    animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ===================================================== */
+/* LOW GPU MODE */
+/* ===================================================== */
+
+.lowGpu *{
+    animation:none !important;
+    transition:none !important;
+    backdrop-filter:none !important;
+}
+
+/* ===================================================== */
 /* MOBILE */
+/* ===================================================== */
 
 @media(max-width:900px){
 
     .sidebar{
         position:relative;
+
         width:100%;
         height:auto;
+
+        border-right:none;
+
+        backdrop-filter:none;
     }
 
     .main{
         margin-left:0;
+        padding:25px;
+    }
+
+    .logo{
+        font-size:44px;
     }
 
     .hero h1{
