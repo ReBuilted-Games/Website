@@ -1,5 +1,6 @@
 /* ===================================================== */
 /* script.js */
+/* FULL ROPROXY VERSION */
 /* ===================================================== */
 
 const GROUP_ID = 223811537
@@ -9,6 +10,10 @@ document.getElementById("gamesGrid")
 
 const searchInput =
 document.getElementById("searchInput")
+
+/* ===================================================== */
+/* CACHE */
+/* ===================================================== */
 
 const CACHE_KEY =
 "rebuilted_games_cache"
@@ -37,7 +42,7 @@ function enableLowGpuMode(){
 enableLowGpuMode()
 
 /* ===================================================== */
-/* FORMAT */
+/* FORMATTERS */
 /* ===================================================== */
 
 function formatNumber(num){
@@ -107,7 +112,7 @@ function createSkeletons(){
 }
 
 /* ===================================================== */
-/* CACHE */
+/* CACHE SAVE */
 /* ===================================================== */
 
 function saveCache(data){
@@ -124,6 +129,10 @@ function saveCache(data){
         })
     )
 }
+
+/* ===================================================== */
+/* CACHE LOAD */
+/* ===================================================== */
 
 function loadCache(){
 
@@ -146,20 +155,20 @@ function loadCache(){
 }
 
 /* ===================================================== */
-/* ERROR */
+/* ERROR UI */
 /* ===================================================== */
 
-function showError(){
+function showError(message = "FAILED TO LOAD GAMES"){
 
     gamesGrid.innerHTML = `
         <div class="errorCard fadeIn">
 
             <h2>
-                FAILED TO LOAD GAMES
+                ${message}
             </h2>
 
             <p>
-                Roblox API unavailable.
+                Roblox API may be unavailable.
             </p>
 
             <button onclick="fetchGames(true)">
@@ -187,6 +196,11 @@ function createGameCard(game, thumbnail){
     )
     : 0
 
+    const description =
+    game.description
+    ? game.description.slice(0,120)
+    : "No description available."
+
     const card =
     document.createElement("div")
 
@@ -207,11 +221,7 @@ function createGameCard(game, thumbnail){
             </div>
 
             <div class="gameDescription">
-                ${
-                    game.description
-                    ? game.description.slice(0,120)
-                    : "No description available."
-                }
+                ${description}
             </div>
 
             <div class="stats">
@@ -334,7 +344,36 @@ function renderGames(payload){
 }
 
 /* ===================================================== */
-/* FETCH */
+/* FETCH WITH TIMEOUT */
+/* ===================================================== */
+
+async function fetchWithTimeout(url, timeout = 10000){
+
+    const controller =
+    new AbortController()
+
+    const timeoutId =
+    setTimeout(() => {
+
+        controller.abort()
+
+    }, timeout)
+
+    const response =
+    await fetch(url, {
+
+        signal:
+        controller.signal
+
+    })
+
+    clearTimeout(timeoutId)
+
+    return response
+}
+
+/* ===================================================== */
+/* FETCH GAMES */
 /* ===================================================== */
 
 async function fetchGames(force = false){
@@ -342,6 +381,10 @@ async function fetchGames(force = false){
     try{
 
         createSkeletons()
+
+        /* ============================= */
+        /* CACHE */
+        /* ============================= */
 
         if(!force){
 
@@ -351,34 +394,53 @@ async function fetchGames(force = false){
             if(cache){
 
                 renderGames(cache)
-                return
             }
         }
 
+        /* ============================= */
+        /* GROUP GAMES */
+        /* ============================= */
+
         const groupResponse =
-        await fetch(
-            `https://games.roblox.com/v2/groups/${GROUP_ID}/games?accessFilter=Public&limit=50&sortOrder=Asc`
+        await fetchWithTimeout(
+        `https://games.roproxy.com/v2/groups/${GROUP_ID}/games?accessFilter=Public&limit=50&sortOrder=Asc`
         )
 
         const groupData =
         await groupResponse.json()
+
+        if(
+            !groupData.data ||
+            groupData.data.length === 0
+        ){
+            showError("NO GAMES FOUND")
+            return
+        }
 
         const universeIds =
         groupData.data.map(
             game => game.id
         )
 
+        /* ============================= */
+        /* GAME INFO */
+        /* ============================= */
+
         const gamesResponse =
-        await fetch(
-            `https://games.roblox.com/v1/games?universeIds=${universeIds.join(",")}`
+        await fetchWithTimeout(
+        `https://games.roproxy.com/v1/games?universeIds=${universeIds.join(",")}`
         )
 
         const gamesData =
         await gamesResponse.json()
 
+        /* ============================= */
+        /* THUMBNAILS */
+        /* ============================= */
+
         const thumbResponse =
-        await fetch(
-            `https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeIds.join(",")}&returnPolicy=PlaceHolder&size=768x432&format=Png&isCircular=false`
+        await fetchWithTimeout(
+        `https://thumbnails.roproxy.com/v1/games/icons?universeIds=${universeIds.join(",")}&returnPolicy=PlaceHolder&size=768x432&format=Png&isCircular=false`
         )
 
         const thumbData =
@@ -392,8 +454,11 @@ async function fetchGames(force = false){
             thumbnails[
                 thumb.targetId
             ] = thumb.imageUrl
-
         })
+
+        /* ============================= */
+        /* PAYLOAD */
+        /* ============================= */
 
         const payload = {
 
@@ -401,10 +466,17 @@ async function fetchGames(force = false){
             gamesData.data,
 
             thumbnails
-
         }
 
+        /* ============================= */
+        /* CACHE SAVE */
+        /* ============================= */
+
         saveCache(payload)
+
+        /* ============================= */
+        /* RENDER */
+        /* ============================= */
 
         renderGames(payload)
 
@@ -420,46 +492,47 @@ async function fetchGames(force = false){
 /* SEARCH */
 /* ===================================================== */
 
-searchInput.addEventListener(
-    "input",
+if(searchInput){
 
-    () => {
+    searchInput.addEventListener(
 
-    const search =
-    searchInput.value
-    .toLowerCase()
+        "input",
 
-    const cards =
-    document.querySelectorAll(
-        ".gameCard"
-    )
+        () => {
 
-    cards.forEach(card => {
+        const search =
+        searchInput.value
+        .toLowerCase()
 
-        const name =
-        card.querySelector(
-            ".gameName"
+        const cards =
+        document.querySelectorAll(
+            ".gameCard"
         )
 
-        if(!name) return
+        cards.forEach(card => {
 
-        if(
+            const name =
+            card.querySelector(
+                ".gameName"
+            )
+
+            if(!name) return
+
+            const visible =
             name.textContent
             .toLowerCase()
             .includes(search)
-        ){
 
-            card.style.display = ""
-
-        }else{
-
-            card.style.display = "none"
-        }
+            card.style.display =
+            visible
+            ? ""
+            : "none"
+        })
     })
-})
+}
 
 /* ===================================================== */
-/* SCROLL */
+/* SMOOTH SCROLL */
 /* ===================================================== */
 
 document.querySelectorAll(
@@ -468,6 +541,7 @@ document.querySelectorAll(
 .forEach(button => {
 
     button.addEventListener(
+
         "click",
 
         () => {
@@ -480,11 +554,24 @@ document.querySelectorAll(
         if(target){
 
             target.scrollIntoView({
-                behavior:"smooth"
+
+                behavior:
+                "smooth"
+
             })
         }
     })
 })
+
+/* ===================================================== */
+/* AUTO REFRESH */
+/* ===================================================== */
+
+setInterval(() => {
+
+    fetchGames(true)
+
+}, 1000 * 60 * 2)
 
 /* ===================================================== */
 /* START */
