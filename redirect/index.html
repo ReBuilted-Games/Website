@@ -4,24 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReBuilted Games - Signing in</title>
-    <style>
-      body { margin:0; font-family:Inter,Segoe UI,Roboto,Arial,sans-serif; background:#050816; color:#f5f7ff; }
-      .wrap { max-width:700px; margin:0 auto; padding:48px 24px 80px; }
-      .card { background:rgba(15,23,42,0.88); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:28px; box-shadow:0 16px 40px rgba(0,0,0,0.25); }
-      h1 { margin-top:0; }
-      p { line-height:1.7; color:#9fb0cc; }
-      a { color:#6ee7ff; }
-    </style>
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
-    <div class="wrap">
-      <div class="card">
-        <h1>Signing in</h1>
-        <p>This page is processing your Roblox sign-in and will return you to the site automatically.</p>
-        <p id="status">Completing sign-in…</p>
-        <p><a href="../">Go back to the main site</a></p>
-      </div>
-    </div>
+    <main class="hero container">
+      <header class="site-header">
+        <div class="brand">
+          <div class="brand-badge">RG</div>
+          <div>
+            <div class="brand-title">Signing in</div>
+            <div class="brand-caption">Finishing your Roblox login and returning to the site.</div>
+          </div>
+        </div>
+      </header>
+      <section class="panel">
+        <h1 class="page-title">Signing in</h1>
+        <p class="lead">This page is processing your Roblox sign-in and will send you back automatically.</p>
+        <div id="status" class="status-banner">Completing sign-in…</div>
+        <div class="site-footer" style="margin-top: 20px;">
+          <span><a href="../">Go back to the main site</a></span>
+        </div>
+      </section>
+    </main>
     <script>
       const params = new URLSearchParams(window.location.search);
       const code = params.get('code');

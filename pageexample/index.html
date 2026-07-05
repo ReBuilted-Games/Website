@@ -3,49 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ReBuilted Games | Page Example</title>
-    <style>
-      :root {
-        --bg: #050816;
-        --panel: rgba(15, 23, 42, 0.88);
-        --text: #f5f7ff;
-        --muted: #9fb0cc;
-        --accent: #5b8cff;
-        --accent-2: #6ee7ff;
-      }
-      body {
-        margin: 0;
-        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-        color: var(--text);
-        min-height: 100vh;
-        background: radial-gradient(circle at top left, rgba(91, 140, 255, 0.24), transparent 35%), linear-gradient(135deg, #07101f, #050816 60%, #111827);
-      }
-      .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
-      .card { background: var(--panel); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 28px; box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
-      h1 { margin-top: 0; font-size: clamp(1.8rem, 3vw, 2.5rem); }
-      p { line-height: 1.7; color: var(--muted); }
-      .box { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.06); }
-      code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 6px; color: #dfe8ff; }
-      a { color: var(--accent-2); }
-    </style>
+    <title>ReBuilted Games | Example</title>
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
-    <div class="wrap">
-      <div class="card">
-        <h1>/pageexample</h1>
-        <p>This is a working example page for the ReBuilted Games site. It is placed in a folder so the route works properly on the site.</p>
-        <div class="box">
-          <strong>Roblox OAuth scope to use:</strong><br />
-          <code>openid profile</code>
+    <main class="hero container">
+      <header class="site-header">
+        <div class="brand">
+          <div class="brand-badge">RG</div>
+          <div>
+            <div class="brand-title">Page Example</div>
+            <div class="brand-caption">A reference page that shows how site routes work.</div>
+          </div>
         </div>
-        <div class="box">
+        <nav class="site-nav">
+          <a href="../">Home</a>
+          <a href="../about/">About</a>
+          <a href="../community/">Community</a>
+          <a href="../TermsOfService/">Terms</a>
+        </nav>
+      </header>
+      <section class="panel">
+        <h1 class="page-title">Example page</h1>
+        <p class="lead">This route shows how folder-based pages are served consistently across the site.</p>
+        <div class="mini-card">
+          <strong>Roblox OAuth scope to use:</strong>
+          <p><code>openid profile</code></p>
+        </div>
+        <div class="mini-card">
           <strong>Why this works:</strong>
-          <p>Roblox uses scopes rather than traditional permissions. For a simple sign-in that shows the user’s display name and profile picture, <code>openid profile</code> is the correct choice.</p>
+          <p>Roblox requires scopes for sign-in. For profile-only data, <code>openid profile</code> is the correct choice.</p>
         </div>
-        <div class="box">
-          <a href="../">Back to the main site</a>
+        <div class="site-footer">
+          <span><a href="../">Back to home</a></span>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   </body>
 </html>

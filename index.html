@@ -5,64 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="ReBuilted Games — a polished Roblox community hub with live group info and sign-in features." />
     <title>ReBuilted Games</title>
-    <style>
-      :root {
-        --bg: #050816;
-        --panel: rgba(10, 18, 32, 0.92);
-        --panel-soft: rgba(15, 23, 42, 0.85);
-        --text: #f5f7ff;
-        --muted: #a1b4d1;
-        --accent: #5b8cff;
-        --accent-2: #6ee7ff;
-        --accent-3: #7c4dff;
-        --border: rgba(255,255,255,0.12);
-        --shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-        color: var(--text);
-        background: radial-gradient(circle at top left, rgba(91, 140, 255, 0.22), transparent 34%), linear-gradient(145deg, #04070f 0%, var(--bg) 42%, #0b1426 100%);
-        min-height: 100vh;
-      }
-      a { color: inherit; text-decoration: none; }
-      .hero { max-width: 1180px; margin: 0 auto; padding: 52px 24px 84px; }
-      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 32px; }
-      .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: 0.04em; }
-      .brand-badge { width: 48px; height: 48px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 1.1rem; }
-      .brand-text { font-size: 0.95rem; color: var(--muted); }
-      .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-      .btn { border: none; cursor: pointer; border-radius: 999px; padding: 14px 20px; font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-3)); box-shadow: 0 16px 40px rgba(91, 140, 255, 0.24); transition: transform .18s ease, box-shadow .18s ease; }
-      .btn:hover { transform: translateY(-1px); box-shadow: 0 22px 52px rgba(91, 140, 255, 0.22); }
-      .btn.secondary { background: rgba(255,255,255,0.08); color: #dfe8ff; box-shadow: none; }
-      .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start; }
-      .panel { background: var(--panel); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: 28px; padding: 34px; box-shadow: var(--shadow); }
-      h1 { font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1.02; margin: 0 0 18px; }
-      .lead { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 26px; max-width: 720px; }
-      .pill-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
-      .pill { background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 999px; color: #dfe8ff; font-size: 0.95rem; }
-      .status-banner { margin-top: 24px; padding: 14px 16px; border-radius: 16px; background: rgba(91, 140, 255, 0.14); border: 1px solid rgba(110, 231, 255, 0.16); color: #eef6ff; font-size: 0.96rem; }
-      .status-banner.error { background: rgba(255, 80, 80, 0.16); border-color: rgba(255, 90, 90, 0.2); }
-      .status-banner.success { background: rgba(34, 197, 94, 0.16); border-color: rgba(34, 197, 94, 0.22); }
-      .profile-card { display: grid; gap: 22px; }
-      .profile-frame { display: grid; gap: 18px; align-items: center; }
-      .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08); }
-      .profile-meta { color: var(--muted); }
-      .section-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
-      .mini-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 20px; }
-      .mini-card h3 { margin: 0 0 10px; font-size: 1rem; }
-      .mini-card p { margin: 0; color: var(--muted); line-height: 1.65; }
-      .footer { margin-top: 30px; color: var(--muted); font-size: 0.96rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-      .footer a { color: inherit; text-decoration: underline; }
-      @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; } }
-      @media (max-width: 680px) {
-        .hero { padding-top: 32px; }
-        .topbar { flex-direction: column; align-items: flex-start; }
-        .brand { gap: 10px; }
-        .hero-grid { gap: 22px; }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="hero">
@@ -187,6 +130,13 @@
         setStatus(`Signed in as ${profile.displayName || profile.username || 'a Roblox user'}.`, 'success');
       }
 
+      function showAuthError() {
+        const error = sessionStorage.getItem('rbx_auth_error');
+        if (!error) return;
+        setStatus(error, 'error');
+        sessionStorage.removeItem('rbx_auth_error');
+      }
+
       function startAuth() {
         const state = crypto.randomUUID();
         sessionStorage.setItem(STATE_KEY, state);
@@ -230,6 +180,7 @@
 
       loadGroupData();
       renderProfile(getState());
+      showAuthError();
       handleAuthCallback();
     </script>
   </body>
