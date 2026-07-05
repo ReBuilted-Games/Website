@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ReBuilted Games — official community site with Roblox account login and live profile info." />
+    <meta name="description" content="ReBuilted Games — a polished Roblox community hub with live group info and sign-in features." />
     <title>ReBuilted Games</title>
     <style>
       :root {
         --bg: #050816;
-        --panel: rgba(15, 23, 42, 0.85);
+        --panel: rgba(15, 23, 42, 0.86);
         --text: #f5f7ff;
         --muted: #9fb0cc;
         --accent: #5b8cff;
         --accent-2: #6ee7ff;
+        --accent-3: #7c4dff;
         --border: rgba(255,255,255,0.12);
       }
       * { box-sizing: border-box; }
@@ -20,52 +21,33 @@
         margin: 0;
         font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
         color: var(--text);
-        background:
-          radial-gradient(circle at top left, rgba(91, 140, 255, 0.3), transparent 32%),
-          linear-gradient(135deg, #07101f 0%, var(--bg) 45%, #111827 100%);
+        background: radial-gradient(circle at top left, rgba(91, 140, 255, 0.26), transparent 32%), linear-gradient(135deg, #07101f 0%, var(--bg) 45%, #111827 100%);
         min-height: 100vh;
       }
-      .hero {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 48px 24px 80px;
-      }
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 36px;
-      }
+      a { color: inherit; text-decoration: none; }
+      .hero { max-width: 1200px; margin: 0 auto; padding: 40px 24px 72px; }
+      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
       .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: 0.04em; }
-      .brand-badge {
-        width: 44px; height: 44px; border-radius: 14px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        display: grid; place-items: center; font-size: 1.25rem;
-      }
-      .auth-btn {
-        border: none; cursor: pointer; border-radius: 999px; padding: 12px 18px;
-        font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), #7c4dff);
-        box-shadow: 0 10px 30px rgba(91, 140, 255, 0.3);
-      }
-      .auth-btn.secondary { background: rgba(255,255,255,0.08); box-shadow: none; }
-      .grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-      .card {
-        background: var(--panel); border: 1px solid var(--border); backdrop-filter: blur(16px);
-        border-radius: 24px; padding: 28px; box-shadow: 0 16px 40px rgba(0,0,0,0.24);
-      }
+      .brand-badge { width: 46px; height: 46px; border-radius: 15px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 1.15rem; }
+      .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .btn { border: none; cursor: pointer; border-radius: 999px; padding: 12px 17px; font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-3)); box-shadow: 0 10px 30px rgba(91, 140, 255, 0.25); }
+      .btn.secondary { background: rgba(255,255,255,0.08); box-shadow: none; }
+      .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+      .card { background: var(--panel); border: 1px solid var(--border); backdrop-filter: blur(16px); border-radius: 24px; padding: 28px; box-shadow: 0 16px 40px rgba(0,0,0,0.24); }
       h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 10px; }
-      .lead { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 18px; }
-      .stats { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+      .lead { color: var(--muted); font-size: 1.04rem; line-height: 1.75; margin-bottom: 18px; }
+      .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
       .pill { background: rgba(255,255,255,0.06); padding: 10px 14px; border-radius: 999px; color: #dfe8ff; }
       .profile-card { display: grid; gap: 16px; }
-      .avatar {
-        width: 102px; height: 102px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.15);
-        background: rgba(255,255,255,0.08);
-      }
+      .avatar { width: 102px; height: 102px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
       .profile-meta { color: var(--muted); }
+      .section-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+      .mini-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 18px; }
+      .mini-card h3 { margin: 0 0 8px; font-size: 1rem; }
+      .mini-card p { margin: 0; color: var(--muted); line-height: 1.6; }
       .hidden { display: none; }
-      .footer { margin-top: 30px; color: var(--muted); font-size: 0.95rem; }
-      @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+      .footer { margin-top: 24px; color: var(--muted); font-size: 0.95rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+      @media (max-width: 960px) { .grid, .section-grid { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -78,28 +60,46 @@
             <div style="font-size:0.8rem;color:var(--muted);font-weight:500;">Community hub</div>
           </div>
         </div>
-        <button id="loginBtn" class="auth-btn">Connect Roblox Account</button>
+        <div class="actions">
+          <a class="btn secondary" href="https://www.roblox.com/communities/223811537/ReBuilted-Games" target="_blank" rel="noreferrer">Join the group</a>
+          <button id="loginBtn" class="btn">Connect Roblox Account</button>
+        </div>
       </header>
 
       <section class="grid">
         <div class="card">
-          <h1>Welcome to the new ReBuilted Games experience</h1>
-          <p class="lead">
-            This version brings your Roblox group into a cleaner, faster landing page with an optional account connection that shows your profile picture and username instantly.
-          </p>
+          <h1 id="groupName">ReBuilted Games</h1>
+          <p class="lead" id="groupDescription">Loading the group description…</p>
           <div class="stats">
             <span class="pill" id="memberCount">Loading members…</span>
             <span class="pill" id="ownerName">Owner: loading…</span>
             <span class="pill">GitHub Pages ready</span>
           </div>
-          <p class="footer">The page uses public Roblox group data and a browser OAuth redirect flow for account linking.</p>
+          <div class="section-grid">
+            <div class="mini-card">
+              <h3>About the community</h3>
+              <p>We recreate games and more while building a fun, welcoming place for creators and players.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Roblox sign-in</h3>
+              <p>Connect your Roblox account to show your profile picture and username on the site.</p>
+            </div>
+            <div class="mini-card">
+              <h3>Built for GitHub Pages</h3>
+              <p>The site is structured with static pages so it can be deployed quickly and easily.</p>
+            </div>
+          </div>
+          <div class="footer">
+            <span><a href="TermsOfService/">Terms of Service</a> • <a href="PrivacyPolicy/">Privacy Policy</a></span>
+            <span><a href="pageexample/">View example page</a></span>
+          </div>
         </div>
 
         <div class="card profile-card">
           <div id="loggedOutState">
             <h2 style="margin-top: 0;">Sign in with Roblox</h2>
             <p class="profile-meta">Connect your Roblox account to see your profile picture update automatically after refresh.</p>
-            <button id="loginBtnAlt" class="auth-btn">Continue with Roblox</button>
+            <button id="loginBtnAlt" class="btn">Continue with Roblox</button>
           </div>
           <div id="loggedInState" class="hidden">
             <img id="avatar" class="avatar" alt="Roblox avatar" />
@@ -107,8 +107,8 @@
               <h2 id="displayName" style="margin: 0 0 6px;">Guest</h2>
               <div id="username" class="profile-meta">@unknown</div>
             </div>
-            <p class="profile-meta">Your Roblox profile picture is loaded from the Roblox API and refreshes on each page load.</p>
-            <button id="logoutBtn" class="auth-btn secondary">Disconnect</button>
+            <p class="profile-meta">Your Roblox profile picture is loaded from Roblox and refreshes when the page loads.</p>
+            <button id="logoutBtn" class="btn secondary">Disconnect</button>
           </div>
         </div>
       </section>
@@ -119,15 +119,18 @@
       const CLIENT_ID = '3577278600546537607';
       const REDIRECT_URI = 'https://rebuilted-games.github.io/Website/redirect/';
       const SCOPES = 'openid profile';
-      const STORAGE_KEY = 'rbx_oauth_state';
+      const STORAGE_KEY = 'RBX-h4jaLBJPjEqIonxGZpteaBfjkB0w_ecVQrDP84nyXQ1icjHhuHm9InRZzzTeWLqF';
 
       async function loadGroupData() {
         try {
           const res = await fetch(`https://groups.roblox.com/v1/groups/${GROUP_ID}`);
           const data = await res.json();
+          document.getElementById('groupName').textContent = data.name || 'ReBuilted Games';
+          document.getElementById('groupDescription').textContent = (data.description || 'We recreate games and more!').replace(/\n/g, ' ');
           document.getElementById('memberCount').textContent = `${data.memberCount} members`;
           document.getElementById('ownerName').textContent = `Owner: ${data.owner?.username || 'unknown'}`;
         } catch (error) {
+          document.getElementById('groupDescription').textContent = 'We recreate games and more!';
           document.getElementById('memberCount').textContent = 'Members unavailable';
           document.getElementById('ownerName').textContent = 'Owner: unavailable';
         }
@@ -173,14 +176,8 @@
         if (!code || !state || state !== savedState) return;
 
         try {
-          const response = await fetch('https://rebuilted-games.github.io/Website/.netlify/functions/roblox-auth', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code, redirectUri: REDIRECT_URI })
-          });
-          const result = await response.json();
-          if (!result.success) throw new Error(result.error || 'Auth failed');
-          sessionStorage.setItem('rbx_profile', JSON.stringify(result.profile));
+          sessionStorage.setItem('rbx_pending_code', code);
+          sessionStorage.setItem('rbx_pending_state', state);
           window.location.href = '/Website/redirect/';
         } catch (error) {
           console.error(error);

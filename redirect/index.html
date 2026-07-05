@@ -32,23 +32,34 @@
       if (!code || !state || state !== savedState) {
         status.textContent = 'No Roblox sign-in response was found.';
       } else {
-        status.textContent = 'Signing you in…';
+        status.textContent = 'Finishing sign-in…';
+        sessionStorage.setItem('rbx_pending_code', code);
+        sessionStorage.setItem('rbx_pending_state', state);
+
         fetch('https://rebuilted-games.github.io/Website/.netlify/functions/roblox-auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code, redirectUri: 'https://rebuilted-games.github.io/Website/redirect/' })
         })
-          .then(res => res.json())
-          .then(result => {
-            if (result.success) {
+          .then(async (res) => {
+            const result = await res.json().catch(() => ({}));
+            if (result.success && result.profile) {
               sessionStorage.setItem('rbx_profile', JSON.stringify(result.profile));
               window.location.href = '../';
-            } else {
-              status.textContent = result.error || 'The sign-in could not be completed.';
+              return;
             }
+            sessionStorage.setItem('rbx_auth_error', result.error || 'The sign-in could not be completed.');
+            status.textContent = result.error || 'The sign-in could not be completed.';
+            setTimeout(() => {
+              window.location.href = '../';
+            }, 1800);
           })
           .catch(() => {
+            sessionStorage.setItem('rbx_auth_error', 'The sign-in could not be completed.');
             status.textContent = 'The sign-in could not be completed.';
+            setTimeout(() => {
+              window.location.href = '../';
+            }, 1800);
           });
       }
     </script>
