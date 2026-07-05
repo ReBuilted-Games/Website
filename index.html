@@ -123,7 +123,9 @@
 
       async function loadGroupData() {
         try {
-          const res = await fetch(`https://groups.roblox.com/v1/groups/${GROUP_ID}`);
+          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://groups.roblox.com/v1/groups/${GROUP_ID}`)}`;
+          const res = await fetch(proxyUrl);
+          if (!res.ok) throw new Error('Request failed');
           const data = await res.json();
           document.getElementById('groupName').textContent = data.name || 'ReBuilted Games';
           document.getElementById('groupDescription').textContent = (data.description || 'We recreate games and more!').replace(/\n/g, ' ');
