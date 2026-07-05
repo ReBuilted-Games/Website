@@ -5,5 +5,58 @@
   "memberCount": 557,
   "owner": {
     "username": "tailsthehero10"
-  }
+  },
+  "announcements": [
+    {
+      "date": "Jul 4, 2026",
+      "title": "Summer build event begins",
+      "summary": "Join the group workspace for a weekend of recreating classic Roblox favorites together."
+    },
+    {
+      "date": "Jun 28, 2026",
+      "title": "New game update: Obby Arena",
+      "summary": "The latest Obby Arena map is live with new paths, traps, and rewards for builders."
+    },
+    {
+      "date": "Jun 20, 2026",
+      "title": "Group forum reboot",
+      "summary": "Forums are back and ready for your suggestions, clan invites, and community feedback."
+    },
+    {
+      "date": "Jun 14, 2026",
+      "title": "Staff tryouts open",
+      "summary": "Apply for moderator and event staff positions through the group discussion page."
+    }
+  ],
+  "gallery": [
+    "https://via.placeholder.com/420x240?text=Group+Build+1",
+    "https://via.placeholder.com/420x240?text=Group+Build+2",
+    "https://via.placeholder.com/420x240?text=Group+Event+3",
+    "https://via.placeholder.com/420x240?text=Group+Event+4",
+    "https://via.placeholder.com/420x240?text=Group+Screenshot+5",
+    "https://via.placeholder.com/420x240?text=Group+Screenshot+6"
+  ],
+  "forumThreads": [
+    {
+      "title": "Map suggestions for Obby Arena",
+      "comments": "42 comments",
+      "link": "https://www.roblox.com/groups/223811537/ReBuilted-Games"
+    },
+    {
+      "title": "Fan art and build showcase",
+      "comments": "31 comments",
+      "link": "https://www.roblox.com/groups/223811537/ReBuilted-Games"
+    },
+    {
+      "title": "Recruiting event organizers",
+      "comments": "18 comments",
+      "link": "https://www.roblox.com/groups/223811537/ReBuilted-Games"
+    },
+    {
+      "title": "Rank request and support",
+      "comments": "26 comments",
+      "link": "https://www.roblox.com/groups/223811537/ReBuilted-Games"
+    }
+  ],
+  "groupLink": "https://www.roblox.com/communities/223811537/ReBuilted-Games"
 }

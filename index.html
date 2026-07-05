@@ -14,7 +14,7 @@
           <div class="brand-badge">RG</div>
           <div>
             <div class="brand-title">ReBuilted Games</div>
-            <div class="brand-caption">A cleaner community hub for Roblox players.</div>
+            <div class="brand-caption">Official Roblox group hub for players and builders.</div>
           </div>
         </div>
         <input type="checkbox" id="navToggle" class="nav-checkbox" />
@@ -35,15 +35,21 @@
 
       <section class="hero-grid">
         <div class="panel">
-          <div class="hero-tag">Roblox community hub · live sign-in ready</div>
-          <h1 id="groupName">ReBuilted Games</h1>
-          <p class="lead" id="groupDescription">Loading the group description…</p>
+          <div class="hero-tag">Roblox group hub · secure sign-in · fast load</div>
+          <div class="group-header">
+            <img id="groupIcon" class="group-icon" src="https://via.placeholder.com/150?text=Group" alt="ReBuilted Games icon" />
+            <div class="group-details">
+              <div class="group-label">Official group</div>
+              <h1 id="groupName">ReBuilted Games</h1>
+              <p class="lead" id="groupDescription">Loading group details and community status…</p>
+            </div>
+          </div>
           <div class="pill-row">
             <span class="pill" id="memberCount">Loading members…</span>
             <span class="pill" id="ownerName">Owner: loading…</span>
             <span class="pill">Live Roblox sign-in</span>
           </div>
-          <div id="statusBanner" class="status-banner" role="status">Connecting the site to Roblox account data…</div>
+          <div id="statusBanner" class="status-banner info" role="status">Loading Roblox connection status…</div>
           <div class="section-grid">
             <div class="mini-card">
               <h3>Community first</h3>
@@ -63,12 +69,29 @@
             <span><a href="pageexample/">View example page</a></span>
           </div>
         </div>
+      </section>
 
+      <section class="content-grid">
+        <div class="panel announcements-panel">
+          <h2>Latest group announcements</h2>
+          <ul id="announcementList" class="announcement-list"></ul>
+        </div>
+        <div class="panel gallery-panel">
+          <h2>Group gallery</h2>
+          <div id="groupGallery" class="gallery-grid"></div>
+        </div>
+        <div class="panel forum-panel">
+          <h2>Popular forum threads</h2>
+          <ul id="forumThreads" class="forum-list"></ul>
+        </div>
+      </section>
+
+      <section class="hero-grid">
         <div class="panel profile-card">
           <div id="loggedOutState" class="profile-frame">
             <div>
               <h2 style="margin: 0;">Sign in with Roblox</h2>
-              <p class="profile-meta">Connect your Roblox account to show your profile picture and username right here.</p>
+              <p class="profile-meta">Connect your Roblox account to display your avatar and username instantly.</p>
             </div>
             <button id="loginBtnAlt" class="btn">Continue with Roblox</button>
           </div>
@@ -80,8 +103,8 @@
                 <div id="username" class="profile-meta">@unknown</div>
               </div>
             </div>
-            <p class="profile-meta">Your Roblox profile picture is loaded from Roblox and updates each time you sign in.</p>
-            <button id="logoutBtn" class="btn secondary">Disconnect</button>
+            <p class="profile-meta">Your Roblox public profile is shown here while you are signed in.</p>
+            <button id="logoutBtn" class="btn secondary">Sign out</button>
           </div>
         </div>
       </section>
@@ -107,14 +130,41 @@
           if (!res.ok) throw new Error('Request failed');
           const data = await res.json();
           document.getElementById('groupName').textContent = data.name || 'ReBuilted Games';
-          document.getElementById('groupDescription').textContent = (data.description || 'We recreate games and more!').replace(/\n/g, ' ');
-          document.getElementById('memberCount').textContent = `${data.memberCount} members`;
+          document.getElementById('groupDescription').textContent = (data.description || 'We recreate games and more.').replace(/\n/g, ' ').trim();
+          document.getElementById('memberCount').textContent = `${data.memberCount || '0'} members`;
           document.getElementById('ownerName').textContent = `Owner: ${data.owner?.username || 'unknown'}`;
+          renderGroupExtras(data);
+          loadGroupIcon(data.id);
         } catch (error) {
-          document.getElementById('groupDescription').textContent = 'We recreate games and more!';
+          document.getElementById('groupDescription').textContent = 'We recreate games and more.';
           document.getElementById('memberCount').textContent = 'Members unavailable';
           document.getElementById('ownerName').textContent = 'Owner: unavailable';
+          document.getElementById('statusBanner').textContent = 'Unable to load group details.';
+          document.getElementById('statusBanner').className = 'status-banner error';
         }
+      }
+
+      function renderGroupExtras(data) {
+        const announcementList = document.getElementById('announcementList');
+        const gallery = document.getElementById('groupGallery');
+        const forumThreads = document.getElementById('forumThreads');
+
+        announcementList.innerHTML = data.announcements?.map(item => `
+          <li class="announcement-item">
+            <div class="announcement-date">${item.date}</div>
+            <h3>${item.title}</h3>
+            <p>${item.summary}</p>
+          </li>
+        `).join('') || '<li class="announcement-item"><p>No announcements available.</p></li>';
+
+        gallery.innerHTML = data.gallery?.map(src => `<img src="${src}" alt="Group image" />`).join('') || '<div class="announcement-item"><p>No gallery images available.</p></div>';
+
+        forumThreads.innerHTML = data.forumThreads?.map(item => `
+          <li class="forum-item">
+            <h3><a href="${item.link}" target="_blank" rel="noreferrer">${item.title}</a></h3>
+            <p>${item.comments}</p>
+          </li>
+        `).join('') || '<li class="forum-item"><p>No forum threads available.</p></li>';
       }
 
       function getState() {
@@ -126,6 +176,17 @@
         if (!banner) return;
         banner.textContent = message;
         banner.className = `status-banner ${type}`.trim();
+      }
+
+      function loadGroupIcon(groupId) {
+        const icon = document.getElementById('groupIcon');
+        icon.src = `https://thumbnails.roblox.com/v1/groups/icons?groupIds=${groupId}&size=150x150&format=Png&isCircular=false`;
+      }
+
+      function clearProfileError() {
+        const error = sessionStorage.getItem('rbx_auth_error');
+        if (!error) return;
+        sessionStorage.removeItem('rbx_auth_error');
       }
 
       function renderProfile(profile) {
@@ -178,10 +239,10 @@
           redirectUrl.searchParams.set('state', state);
           sessionStorage.setItem('rbx_pending_code', code);
           sessionStorage.setItem('rbx_pending_state', state);
-          window.location.href = redirectUrl.toString();
+          window.location.assign(redirectUrl.toString());
         } catch (error) {
           console.error(error);
-          alert('Roblox login could not be completed.');
+          setStatus('Roblox login could not be completed.', 'error');
         }
       }
 
@@ -196,6 +257,7 @@
       loadGroupData();
       renderProfile(getState());
       showAuthError();
+      clearProfileError();
       handleAuthCallback();
     </script>
   </body>
