@@ -117,14 +117,16 @@
     <script>
       const GROUP_ID = 223811537;
       const CLIENT_ID = '3577278600546537607';
-      const REDIRECT_URI = 'https://rebuilted-games.github.io/Website/redirect/';
       const SCOPES = 'openid profile';
       const STORAGE_KEY = 'RBX-h4jaLBJPjEqIonxGZpteaBfjkB0w_ecVQrDP84nyXQ1icjHhuHm9InRZzzTeWLqF';
 
+      function getRedirectUri() {
+        return new URL('./redirect/', window.location.href).toString();
+      }
+
       async function loadGroupData() {
         try {
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://groups.roblox.com/v1/groups/${GROUP_ID}`)}`;
-          const res = await fetch(proxyUrl);
+          const res = await fetch('./data/group.json');
           if (!res.ok) throw new Error('Request failed');
           const data = await res.json();
           document.getElementById('groupName').textContent = data.name || 'ReBuilted Games';
@@ -163,7 +165,7 @@
         const params = new URLSearchParams({
           client_id: CLIENT_ID,
           response_type: 'code',
-          redirect_uri: REDIRECT_URI,
+          redirect_uri: getRedirectUri(),
           scope: SCOPES,
           state
         });
@@ -180,7 +182,7 @@
         try {
           sessionStorage.setItem('rbx_pending_code', code);
           sessionStorage.setItem('rbx_pending_state', state);
-          window.location.href = '/Website/redirect/';
+          window.location.href = './redirect/';
         } catch (error) {
           console.error(error);
           alert('Roblox login could not be completed from this static GitHub Pages setup.');

@@ -36,10 +36,12 @@
         sessionStorage.setItem('rbx_pending_code', code);
         sessionStorage.setItem('rbx_pending_state', state);
 
-        fetch('https://rebuilted-games.github.io/Website/.netlify/functions/roblox-auth', {
+        const redirectUri = new URL(window.location.pathname, window.location.origin).toString();
+
+        fetch('/.netlify/functions/roblox-auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code, redirectUri: 'https://rebuilted-games.github.io/Website/redirect/' })
+          body: JSON.stringify({ code, redirectUri })
         })
           .then(async (res) => {
             const result = await res.json().catch(() => ({}));
