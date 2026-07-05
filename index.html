@@ -8,19 +8,24 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="hero">
-      <header class="topbar">
+    <main class="hero container">
+      <header class="site-header">
         <div class="brand">
           <div class="brand-badge">RG</div>
           <div>
-            <div>ReBuilted Games</div>
-            <div class="brand-text">A cleaner community hub for Roblox players.</div>
+            <div class="brand-title">ReBuilted Games</div>
+            <div class="brand-caption">A cleaner community hub for Roblox players.</div>
           </div>
         </div>
-        <div class="actions">
-          <a class="btn secondary" href="https://www.roblox.com/communities/223811537/ReBuilted-Games" target="_blank" rel="noreferrer">Join the group</a>
+        <input type="checkbox" id="navToggle" class="nav-checkbox" />
+        <label for="navToggle" class="nav-toggle">
+          Menu
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </label>
+        <nav class="site-nav">
+          <a class="btn secondary" href="https://www.roblox.com/communities/223811537/ReBuilted-Games" target="_blank" rel="noreferrer">Join group</a>
           <button id="loginBtn" class="btn">Connect Roblox</button>
-        </div>
+        </nav>
       </header>
 
       <section class="hero-grid">
