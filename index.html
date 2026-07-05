@@ -106,6 +106,10 @@
             <p class="profile-meta">Your Roblox public profile is shown here while you are signed in.</p>
             <button id="logoutBtn" class="btn secondary">Sign out</button>
           </div>
+          <div id="savedUsers" class="saved-users hidden">
+            <h3>Saved connected users</h3>
+            <ul id="savedUserList" class="saved-user-list"></ul>
+          </div>
         </div>
       </section>
     </main>
@@ -121,7 +125,8 @@
       const STATE_KEY = 'rbx_oauth_state';
 
       function getRedirectUri() {
-        return new URL('./redirect/', window.location.href).toString();
+        const path = window.location.pathname.replace(/index\.html$/, '');
+        return `${window.location.origin}${path}redirect/`;
       }
 
       async function loadGroupData() {
@@ -168,7 +173,49 @@
       }
 
       function getState() {
-        return sessionStorage.getItem('rbx_profile') ? JSON.parse(sessionStorage.getItem('rbx_profile')) : null;
+        const active = sessionStorage.getItem('rbx_profile');
+        if (active) return JSON.parse(active);
+        const lastSaved = localStorage.getItem('rbx_last_profile');
+        return lastSaved ? JSON.parse(lastSaved) : null;
+      }
+
+      function saveProfileLocally(profile) {
+        if (!profile || !profile.username) return;
+        const lastProfile = JSON.stringify(profile);
+        sessionStorage.setItem('rbx_profile', lastProfile);
+        localStorage.setItem('rbx_last_profile', lastProfile);
+
+        const saved = JSON.parse(localStorage.getItem('rbx_saved_profiles') || '[]');
+        const exists = saved.find((item) => item.username === profile.username);
+        if (!exists) {
+          saved.unshift(profile);
+          if (saved.length > 8) saved.pop();
+          localStorage.setItem('rbx_saved_profiles', JSON.stringify(saved));
+        }
+        renderSavedUsers();
+      }
+
+      function renderSavedUsers() {
+        const saved = JSON.parse(localStorage.getItem('rbx_saved_profiles') || '[]');
+        const savedUsers = document.getElementById('savedUsers');
+        const savedUserList = document.getElementById('savedUserList');
+
+        if (!saved.length) {
+          savedUsers.classList.add('hidden');
+          savedUserList.innerHTML = '';
+          return;
+        }
+
+        savedUsers.classList.remove('hidden');
+        savedUserList.innerHTML = saved.map((item) => `
+          <li class="saved-user-item">
+            <img class="saved-user-avatar" src="${item.avatarUrl}" alt="${item.username} avatar" />
+            <div>
+              <div class="saved-user-name">${item.displayName || item.username}</div>
+              <div class="saved-user-meta">@${item.username}</div>
+            </div>
+          </li>
+        `).join('');
       }
 
       function setStatus(message, type = 'info') {
@@ -178,9 +225,18 @@
         banner.className = `status-banner ${type}`.trim();
       }
 
-      function loadGroupIcon(groupId) {
+      async function loadGroupIcon(groupId) {
         const icon = document.getElementById('groupIcon');
-        icon.src = `https://thumbnails.roblox.com/v1/groups/icons?groupIds=${groupId}&size=150x150&format=Png&isCircular=false`;
+        try {
+          const response = await fetch(`https://thumbnails.roblox.com/v1/groups/icons?groupIds=${groupId}&size=150x150&format=Png&isCircular=false`);
+          const data = await response.json();
+          const thumb = data.data?.[0]?.imageUrl;
+          if (thumb) {
+            icon.src = thumb;
+          }
+        } catch {
+          // leave the placeholder icon if the fetch fails
+        }
       }
 
       function clearProfileError() {
@@ -204,6 +260,7 @@
         document.getElementById('displayName').textContent = profile.displayName || profile.username || 'Roblox User';
         document.getElementById('username').textContent = `@${profile.username || 'unknown'}`;
         setStatus(`Signed in as ${profile.displayName || profile.username || 'a Roblox user'}.`, 'success');
+        saveProfileLocally(profile);
       }
 
       function showAuthError() {
@@ -215,11 +272,13 @@
 
       function startAuth() {
         const state = crypto.randomUUID();
+        const redirectUri = getRedirectUri();
         sessionStorage.setItem(STATE_KEY, state);
+        sessionStorage.setItem('rbx_redirect_uri', redirectUri);
         const params = new URLSearchParams({
           client_id: CLIENT_ID,
           response_type: 'code',
-          redirect_uri: getRedirectUri(),
+          redirect_uri: redirectUri,
           scope: SCOPES,
           state
         });
@@ -255,6 +314,7 @@
       });
 
       loadGroupData();
+      renderSavedUsers();
       renderProfile(getState());
       showAuthError();
       clearProfileError();

@@ -269,6 +269,51 @@ img {
   border: 1px solid rgba(255,255,255,0.10);
 }
 
+.saved-users {
+  margin-top: 24px;
+}
+
+.saved-users h3 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+}
+
+.saved-user-list {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.saved-user-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.saved-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.saved-user-name {
+  color: #eef6ff;
+  font-weight: 700;
+}
+
+.saved-user-meta {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
 .panel h2 {
   margin: 0 0 18px;
 }

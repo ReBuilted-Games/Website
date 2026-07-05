@@ -52,13 +52,14 @@
       history.replaceState(null, '', cleanUrl);
 
       if (!code || !state || state !== savedState) {
-        status.textContent = 'No Roblox sign-in response was found.';
+        status.textContent = 'Roblox sign-in response missing or invalid state. Please try again.';
+        sessionStorage.setItem('rbx_auth_error', 'Roblox sign-in response missing or invalid.');
       } else {
         status.textContent = 'Completing sign-in…';
         sessionStorage.setItem('rbx_pending_code', code);
         sessionStorage.setItem('rbx_pending_state', state);
 
-        const redirectUri = cleanUrl;
+        const redirectUri = sessionStorage.getItem('rbx_redirect_uri') || cleanUrl;
 
         fetch('/.netlify/functions/roblox-auth', {
           method: 'POST',
@@ -72,18 +73,21 @@
               window.location.replace('../');
               return;
             }
-            sessionStorage.setItem('rbx_auth_error', result.error || 'The sign-in could not be completed.');
-            status.textContent = result.error || 'The sign-in could not be completed.';
+            const message = result.error || 'Sign-in failed. Please try again.';
+            sessionStorage.setItem('rbx_auth_error', message);
+            status.textContent = message;
             setTimeout(() => {
               window.location.replace('../');
-            }, 1800);
+            }, 2400);
           })
-          .catch(() => {
-            sessionStorage.setItem('rbx_auth_error', 'The sign-in could not be completed.');
-            status.textContent = 'The sign-in could not be completed.';
+          .catch((err) => {
+            const message = 'Unable to complete sign-in. Check your connection.';
+            console.error(err);
+            sessionStorage.setItem('rbx_auth_error', message);
+            status.textContent = message;
             setTimeout(() => {
               window.location.replace('../');
-            }, 1800);
+            }, 2400);
           });
       }
     </script>
