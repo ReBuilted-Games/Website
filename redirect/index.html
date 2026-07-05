@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReBuilted Games - Redirect</title>
+    <style>
+      body { margin:0; font-family:Inter,Segoe UI,Roboto,Arial,sans-serif; background:#050816; color:#f5f7ff; }
+      .wrap { max-width:700px; margin:0 auto; padding:48px 24px 80px; }
+      .card { background:rgba(15,23,42,0.88); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:28px; box-shadow:0 16px 40px rgba(0,0,0,0.25); }
+      h1 { margin-top:0; }
+      p { line-height:1.7; color:#9fb0cc; }
+      a { color:#6ee7ff; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Redirect</h1>
+        <p>This page is ready for Roblox OAuth redirect handling and can forward users back to the main site after authentication.</p>
+        <p id="status">Finishing sign-in…</p>
+        <p><a href="../">Go back to the main site</a></p>
+      </div>
+    </div>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+      const state = params.get('state');
+      const savedState = sessionStorage.getItem('rbx_oauth_state');
+      const status = document.getElementById('status');
+
+      if (!code || !state || state !== savedState) {
+        status.textContent = 'No Roblox sign-in response was found.';
+      } else {
+        status.textContent = 'Signing you in…';
+        fetch('https://rebuilted-games.github.io/Website/.netlify/functions/roblox-auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code, redirectUri: 'https://rebuilted-games.github.io/Website/redirect/' })
+        })
+          .then(res => res.json())
+          .then(result => {
+            if (result.success) {
+              sessionStorage.setItem('rbx_profile', JSON.stringify(result.profile));
+              window.location.href = '../';
+            } else {
+              status.textContent = result.error || 'The sign-in could not be completed.';
+            }
+          })
+          .catch(() => {
+            status.textContent = 'The sign-in could not be completed.';
+          });
+      }
+    </script>
+  </body>
+</html>
