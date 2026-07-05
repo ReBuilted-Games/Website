@@ -26,7 +26,7 @@
       const params = new URLSearchParams(window.location.search);
       const code = params.get('code');
       const state = params.get('state');
-      const savedState = sessionStorage.getItem('rbx_oauth_state');
+      const savedState = sessionStorage.getItem('rbx_oauth_state') || sessionStorage.getItem('RBX-h4jaLBJPjEqIonxGZpteaBfjkB0w_ecVQrDP84nyXQ1icjHhuHm9InRZzzTeWLqF');
       const status = document.getElementById('status');
 
       if (!code || !state || state !== savedState) {

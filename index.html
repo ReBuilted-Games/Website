@@ -38,6 +38,9 @@
       .lead { color: var(--muted); font-size: 1.04rem; line-height: 1.75; margin-bottom: 18px; }
       .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
       .pill { background: rgba(255,255,255,0.06); padding: 10px 14px; border-radius: 999px; color: #dfe8ff; }
+      .status-banner { margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: rgba(91, 140, 255, 0.14); border: 1px solid rgba(110, 231, 255, 0.2); color: #dfe8ff; font-size: 0.95rem; }
+      .status-banner.error { background: rgba(255, 90, 90, 0.14); border-color: rgba(255, 90, 90, 0.28); }
+      .status-banner.success { background: rgba(34, 197, 94, 0.16); border-color: rgba(34, 197, 94, 0.24); }
       .profile-card { display: grid; gap: 16px; }
       .avatar { width: 102px; height: 102px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
       .profile-meta { color: var(--muted); }
@@ -73,8 +76,9 @@
           <div class="stats">
             <span class="pill" id="memberCount">Loading members…</span>
             <span class="pill" id="ownerName">Owner: loading…</span>
-            <span class="pill">GitHub Pages ready</span>
+            <span class="pill">Roblox auth ready</span>
           </div>
+          <div id="statusBanner" class="status-banner" role="status">Connecting the site to Roblox account data…</div>
           <div class="section-grid">
             <div class="mini-card">
               <h3>About the community</h3>
@@ -118,7 +122,7 @@
       const GROUP_ID = 223811537;
       const CLIENT_ID = '3577278600546537607';
       const SCOPES = 'openid profile';
-      const STORAGE_KEY = 'RBX-h4jaLBJPjEqIonxGZpteaBfjkB0w_ecVQrDP84nyXQ1icjHhuHm9InRZzzTeWLqF';
+      const STATE_KEY = 'rbx_oauth_state';
 
       function getRedirectUri() {
         return new URL('./redirect/', window.location.href).toString();
@@ -144,12 +148,20 @@
         return sessionStorage.getItem('rbx_profile') ? JSON.parse(sessionStorage.getItem('rbx_profile')) : null;
       }
 
+      function setStatus(message, type = 'info') {
+        const banner = document.getElementById('statusBanner');
+        if (!banner) return;
+        banner.textContent = message;
+        banner.className = `status-banner ${type}`.trim();
+      }
+
       function renderProfile(profile) {
         const loggedOut = document.getElementById('loggedOutState');
         const loggedIn = document.getElementById('loggedInState');
         if (!profile) {
           loggedOut.classList.remove('hidden');
           loggedIn.classList.add('hidden');
+          setStatus('Connect your Roblox account to verify your identity and show your profile here.', 'info');
           return;
         }
         loggedOut.classList.add('hidden');
@@ -157,11 +169,12 @@
         document.getElementById('avatar').src = profile.avatarUrl || 'https://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&userId=1';
         document.getElementById('displayName').textContent = profile.displayName || profile.username || 'Roblox User';
         document.getElementById('username').textContent = `@${profile.username || 'unknown'}`;
+        setStatus(`Signed in as ${profile.displayName || profile.username || 'a Roblox user'}.`, 'success');
       }
 
       function startAuth() {
         const state = crypto.randomUUID();
-        sessionStorage.setItem(STORAGE_KEY, state);
+        sessionStorage.setItem(STATE_KEY, state);
         const params = new URLSearchParams({
           client_id: CLIENT_ID,
           response_type: 'code',
@@ -176,16 +189,19 @@
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
         const state = params.get('state');
-        const savedState = sessionStorage.getItem(STORAGE_KEY);
+        const savedState = sessionStorage.getItem(STATE_KEY);
         if (!code || !state || state !== savedState) return;
 
         try {
+          const redirectUrl = new URL('./redirect/', window.location.href);
+          redirectUrl.searchParams.set('code', code);
+          redirectUrl.searchParams.set('state', state);
           sessionStorage.setItem('rbx_pending_code', code);
           sessionStorage.setItem('rbx_pending_state', state);
-          window.location.href = './redirect/';
+          window.location.href = redirectUrl.toString();
         } catch (error) {
           console.error(error);
-          alert('Roblox login could not be completed from this static GitHub Pages setup.');
+          alert('Roblox login could not be completed.');
         }
       }
 
@@ -193,6 +209,7 @@
       document.getElementById('loginBtnAlt').addEventListener('click', startAuth);
       document.getElementById('logoutBtn').addEventListener('click', () => {
         sessionStorage.removeItem('rbx_profile');
+        sessionStorage.removeItem('rbx_auth_error');
         renderProfile(null);
       });
 
