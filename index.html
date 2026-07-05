@@ -8,49 +8,60 @@
     <style>
       :root {
         --bg: #050816;
-        --panel: rgba(15, 23, 42, 0.86);
+        --panel: rgba(10, 18, 32, 0.92);
+        --panel-soft: rgba(15, 23, 42, 0.85);
         --text: #f5f7ff;
-        --muted: #9fb0cc;
+        --muted: #a1b4d1;
         --accent: #5b8cff;
         --accent-2: #6ee7ff;
         --accent-3: #7c4dff;
         --border: rgba(255,255,255,0.12);
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
       }
       * { box-sizing: border-box; }
       body {
         margin: 0;
         font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
         color: var(--text);
-        background: radial-gradient(circle at top left, rgba(91, 140, 255, 0.26), transparent 32%), linear-gradient(135deg, #07101f 0%, var(--bg) 45%, #111827 100%);
+        background: radial-gradient(circle at top left, rgba(91, 140, 255, 0.22), transparent 34%), linear-gradient(145deg, #04070f 0%, var(--bg) 42%, #0b1426 100%);
         min-height: 100vh;
       }
       a { color: inherit; text-decoration: none; }
-      .hero { max-width: 1200px; margin: 0 auto; padding: 40px 24px 72px; }
-      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
+      .hero { max-width: 1180px; margin: 0 auto; padding: 52px 24px 84px; }
+      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 32px; }
       .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: 0.04em; }
-      .brand-badge { width: 46px; height: 46px; border-radius: 15px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 1.15rem; }
+      .brand-badge { width: 48px; height: 48px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 1.1rem; }
+      .brand-text { font-size: 0.95rem; color: var(--muted); }
       .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-      .btn { border: none; cursor: pointer; border-radius: 999px; padding: 12px 17px; font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-3)); box-shadow: 0 10px 30px rgba(91, 140, 255, 0.25); }
-      .btn.secondary { background: rgba(255,255,255,0.08); box-shadow: none; }
-      .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
-      .card { background: var(--panel); border: 1px solid var(--border); backdrop-filter: blur(16px); border-radius: 24px; padding: 28px; box-shadow: 0 16px 40px rgba(0,0,0,0.24); }
-      h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 10px; }
-      .lead { color: var(--muted); font-size: 1.04rem; line-height: 1.75; margin-bottom: 18px; }
-      .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-      .pill { background: rgba(255,255,255,0.06); padding: 10px 14px; border-radius: 999px; color: #dfe8ff; }
-      .status-banner { margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: rgba(91, 140, 255, 0.14); border: 1px solid rgba(110, 231, 255, 0.2); color: #dfe8ff; font-size: 0.95rem; }
-      .status-banner.error { background: rgba(255, 90, 90, 0.14); border-color: rgba(255, 90, 90, 0.28); }
-      .status-banner.success { background: rgba(34, 197, 94, 0.16); border-color: rgba(34, 197, 94, 0.24); }
-      .profile-card { display: grid; gap: 16px; }
-      .avatar { width: 102px; height: 102px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
+      .btn { border: none; cursor: pointer; border-radius: 999px; padding: 14px 20px; font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-3)); box-shadow: 0 16px 40px rgba(91, 140, 255, 0.24); transition: transform .18s ease, box-shadow .18s ease; }
+      .btn:hover { transform: translateY(-1px); box-shadow: 0 22px 52px rgba(91, 140, 255, 0.22); }
+      .btn.secondary { background: rgba(255,255,255,0.08); color: #dfe8ff; box-shadow: none; }
+      .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start; }
+      .panel { background: var(--panel); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: 28px; padding: 34px; box-shadow: var(--shadow); }
+      h1 { font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1.02; margin: 0 0 18px; }
+      .lead { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 26px; max-width: 720px; }
+      .pill-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+      .pill { background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 999px; color: #dfe8ff; font-size: 0.95rem; }
+      .status-banner { margin-top: 24px; padding: 14px 16px; border-radius: 16px; background: rgba(91, 140, 255, 0.14); border: 1px solid rgba(110, 231, 255, 0.16); color: #eef6ff; font-size: 0.96rem; }
+      .status-banner.error { background: rgba(255, 80, 80, 0.16); border-color: rgba(255, 90, 90, 0.2); }
+      .status-banner.success { background: rgba(34, 197, 94, 0.16); border-color: rgba(34, 197, 94, 0.22); }
+      .profile-card { display: grid; gap: 22px; }
+      .profile-frame { display: grid; gap: 18px; align-items: center; }
+      .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08); }
       .profile-meta { color: var(--muted); }
-      .section-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
-      .mini-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 18px; }
-      .mini-card h3 { margin: 0 0 8px; font-size: 1rem; }
-      .mini-card p { margin: 0; color: var(--muted); line-height: 1.6; }
-      .hidden { display: none; }
-      .footer { margin-top: 24px; color: var(--muted); font-size: 0.95rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-      @media (max-width: 960px) { .grid, .section-grid { grid-template-columns: 1fr; } }
+      .section-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+      .mini-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 20px; }
+      .mini-card h3 { margin: 0 0 10px; font-size: 1rem; }
+      .mini-card p { margin: 0; color: var(--muted); line-height: 1.65; }
+      .footer { margin-top: 30px; color: var(--muted); font-size: 0.96rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+      .footer a { color: inherit; text-decoration: underline; }
+      @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; } }
+      @media (max-width: 680px) {
+        .hero { padding-top: 32px; }
+        .topbar { flex-direction: column; align-items: flex-start; }
+        .brand { gap: 10px; }
+        .hero-grid { gap: 22px; }
+      }
     </style>
   </head>
   <body>
@@ -60,37 +71,37 @@
           <div class="brand-badge">RG</div>
           <div>
             <div>ReBuilted Games</div>
-            <div style="font-size:0.8rem;color:var(--muted);font-weight:500;">Community hub</div>
+            <div class="brand-text">A cleaner community hub for Roblox players.</div>
           </div>
         </div>
         <div class="actions">
           <a class="btn secondary" href="https://www.roblox.com/communities/223811537/ReBuilted-Games" target="_blank" rel="noreferrer">Join the group</a>
-          <button id="loginBtn" class="btn">Connect Roblox Account</button>
+          <button id="loginBtn" class="btn">Connect Roblox</button>
         </div>
       </header>
 
-      <section class="grid">
-        <div class="card">
+      <section class="hero-grid">
+        <div class="panel">
           <h1 id="groupName">ReBuilted Games</h1>
           <p class="lead" id="groupDescription">Loading the group description…</p>
-          <div class="stats">
+          <div class="pill-row">
             <span class="pill" id="memberCount">Loading members…</span>
             <span class="pill" id="ownerName">Owner: loading…</span>
-            <span class="pill">Roblox auth ready</span>
+            <span class="pill">Live Roblox sign-in</span>
           </div>
           <div id="statusBanner" class="status-banner" role="status">Connecting the site to Roblox account data…</div>
           <div class="section-grid">
             <div class="mini-card">
-              <h3>About the community</h3>
-              <p>We recreate games and more while building a fun, welcoming place for creators and players.</p>
+              <h3>Community first</h3>
+              <p>Stay informed with the latest group activity and member count in a polished interface.</p>
             </div>
             <div class="mini-card">
-              <h3>Roblox sign-in</h3>
-              <p>Connect your Roblox account to show your profile picture and username on the site.</p>
+              <h3>Instant sign-in</h3>
+              <p>Authenticate with Roblox and see your display name and profile image on the page.</p>
             </div>
             <div class="mini-card">
-              <h3>Static site structure</h3>
-              <p>The site is built with direct page routes so it can be deployed quickly and easily.</p>
+              <h3>Fast load</h3>
+              <p>The site is built with lightweight static pages and smart client-side connections.</p>
             </div>
           </div>
           <div class="footer">
@@ -99,19 +110,23 @@
           </div>
         </div>
 
-        <div class="card profile-card">
-          <div id="loggedOutState">
-            <h2 style="margin-top: 0;">Sign in with Roblox</h2>
-            <p class="profile-meta">Connect your Roblox account to see your profile picture update automatically after refresh.</p>
+        <div class="panel profile-card">
+          <div id="loggedOutState" class="profile-frame">
+            <div>
+              <h2 style="margin: 0;">Sign in with Roblox</h2>
+              <p class="profile-meta">Connect your Roblox account to show your profile picture and username right here.</p>
+            </div>
             <button id="loginBtnAlt" class="btn">Continue with Roblox</button>
           </div>
-          <div id="loggedInState" class="hidden">
-            <img id="avatar" class="avatar" alt="Roblox avatar" />
-            <div>
-              <h2 id="displayName" style="margin: 0 0 6px;">Guest</h2>
-              <div id="username" class="profile-meta">@unknown</div>
+          <div id="loggedInState" class="hidden profile-frame">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img id="avatar" class="avatar" alt="Roblox avatar" />
+              <div>
+                <h2 id="displayName" style="margin: 0 0 6px;">Guest</h2>
+                <div id="username" class="profile-meta">@unknown</div>
+              </div>
             </div>
-            <p class="profile-meta">Your Roblox profile picture is loaded from Roblox and refreshes when the page loads.</p>
+            <p class="profile-meta">Your Roblox profile picture is loaded from Roblox and updates each time you sign in.</p>
             <button id="logoutBtn" class="btn secondary">Disconnect</button>
           </div>
         </div>
