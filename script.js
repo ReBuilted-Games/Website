@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // We use a proxy (roproxy.com) to avoid browser CORS errors.
     const groupId = 223811537; // Your group ID
     const groupApiUrl = `https://groups.roproxy.com/v1/groups/${groupId}`;
-    const iconApiUrl = `https://thumbnails.roproxy.com/v1/groups/icons?groupIds=${groupId}&size=150x150&format=Png&isCircular=false`;
-
+    
     fetch(groupApiUrl)
         .then(response => {
             if (!response.ok) {
@@ -19,20 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error fetching group data:', error);
             // You could display an error message to the user on the page
-        });
-    
-    fetch(iconApiUrl)
-        .then(response => {
-            if (!response.ok) throw new Error('Icon API response failed.');
-            return response.json();
-        })
-        .then(iconData => {
-            if (iconData.data && iconData.data.length > 0) {
-                document.getElementById('group-icon').src = iconData.data[0].imageUrl;
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching group icon:', error);
         });
 });
 
