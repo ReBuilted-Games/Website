@@ -104,6 +104,22 @@ img {
   display: none;
 }
 
+.nav-toggle {
+  display: none; /* Hidden by default on desktop */
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--muted);
+}
+
+.nav-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+}
+
 /* --- Hero Section (Home Page) --- */
 .hero {
   text-align: center;
@@ -308,17 +324,23 @@ img {
 @media (max-width: 760px) {
   .site-header {
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
   }
 
   .nav-toggle {
-    display: none; /* Hiding for simplicity, can be implemented with JS */
+    display: block; /* Show the toggle on mobile */
   }
 
   .site-nav {
+    display: none; /* Hide nav by default on mobile */
     flex-basis: 100%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .nav-checkbox:checked ~ .site-nav {
+    display: flex; /* Show nav when checkbox is checked */
   }
 
   .group-header {
