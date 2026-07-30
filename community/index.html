@@ -4,42 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReBuilted Games - Community</title>
-    <link rel="stylesheet" href="../style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <main class="hero container">
+    <div class="container">
       <header class="site-header">
         <a href="/" class="brand">
-          <img id="group-icon" class="brand-badge" src="https://via.placeholder.com/48?text=RG" alt="Group Icon">
+          <div class="brand-badge">RG</div>
           <div>
             <div class="brand-title">ReBuilted Games</div>
             <div class="brand-caption">Community Hub</div>
           </div>
         </a>
+        <input type="checkbox" id="navToggle" class="nav-checkbox" />
+        <label for="navToggle" class="nav-toggle">
+          Menu
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </label>
         <nav class="site-nav">
           <a href="../">Home</a>
           <a href="../about/">About</a>
-          <a href="/community/">Community</a>
+          <a href="./">Community</a>
           <a href="/games/">Games</a>
           <a href="/pageexample/">Example</a>
         </nav>
       </header>
-      <section class="panel">
+      <main class="panel">
         <h1 class="page-title">Community</h1>
         <p class="lead">Stay up to date with the latest announcements and discussions from the group.</p>
         
-        <div id="announcements-list" class="card-list" style="margin-top: 2rem;">
-            <p>Loading announcements...</p>
-        </div>
-
-      </section>
-    </main>
+        <ul id="announcements-list" class="announcement-list">
+            <li>Loading announcements...</li>
+        </ul>
+      </main>
+    </div>
     <footer class="site-footer-persistent">
       <span>© 2024 ReBuilted Games</span>
-      <span><a href="/">Home</a> · <a href="/about/">About</a> · <a href="/community/">Community</a> · <a href="/games/">Games</a></span>
+      <span><a href="../">Home</a> · <a href="../about/">About</a> · <a href="./">Community</a> · <a href="../games/">Games</a></span>
     </footer>
-    <script src="../header.js"></script>
     <script src="community.js"></script>
   </body>
 </html>

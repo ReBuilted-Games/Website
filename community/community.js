@@ -15,14 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 announcementsList.innerHTML = ''; // Clear previous announcement
 
                 if (data.shout) {
-                    const item = document.createElement('div');
-                    item.className = 'card-item';
+                    const item = document.createElement('li');
+                    item.className = 'announcement-item';
                     item.innerHTML = `
-                        <h3>Latest Announcement (Shout)</h3>
-                        <p class="meta">
-                            Posted by ${data.shout.poster.displayName} (@${data.shout.poster.username})
-                            on ${new Date(data.shout.updated).toLocaleDateString()}
-                        </p>
+                        <span class="announcement-date">${new Date(data.shout.updated).toLocaleDateString()}</span>
+                        <h3>Posted by ${data.shout.poster.displayName} (@${data.shout.poster.username})</h3>
                         <p>${data.shout.body}</p>
                     `;
                     announcementsList.appendChild(item);
@@ -32,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error fetching announcements:', error);
-                announcementsList.innerHTML = '<p>Could not load announcements at this time.</p>';
+                announcementsList.innerHTML = '<div class="alert error">Could not load announcements at this time.</div>';
             });
     }
 
