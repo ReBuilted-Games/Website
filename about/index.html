@@ -4,57 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About ReBuilted Games</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <main class="hero container">
       <header class="site-header">
-        <div class="brand">
-          <div class="brand-badge">RG</div>
+        <a href="/" class="brand">
+          <img id="group-icon" class="brand-badge" src="https://via.placeholder.com/48?text=RG" alt="Group Icon">
           <div>
-            <div class="brand-title">About ReBuilted Games</div>
-            <div class="brand-caption">Everything you need to know about the community.</div>
+            <div id="group-name" class="brand-title">Loading...</div>
+            <div id="group-owner" class="brand-caption">...</div>
           </div>
-        </div>
-        <input type="checkbox" id="navToggle" class="nav-checkbox" />
-        <label for="navToggle" class="nav-toggle">
-          Menu
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </label>
+        </a>
         <nav class="site-nav">
           <a href="../">Home</a>
+          <a href="/about/">About</a>
           <a href="../community/">Community</a>
           <a href="../games/">Games</a>
           <a href="../pageexample/">Example</a>
-          <a href="../PrivacyPolicy/">Privacy</a>
-          <a href="../TermsOfService/">Terms</a>
         </nav>
       </header>
       <section class="panel">
         <h1 class="page-title">About ReBuilted Games</h1>
-        <p class="lead">ReBuilted Games is a Roblox community hub for builders, players, and event organizers. This site shows group news, sign-in status, and quick access to community pages.</p>
+        <p class="lead" id="group-description">Loading group description...</p>
         <div class="section-grid">
-          <div class="mini-card">
-            <h3>Group updates</h3>
-            <p>Announcements, gallery posts, and forum highlights keep the community connected.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Roblox sign-in</h3>
-            <p>Members can connect their Roblox account to display their avatar and username.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Fast pages</h3>
-            <p>Each page loads as a lightweight static route, so navigation feels smooth and immediate.</p>
-          </div>
+            <div class="stat-item">
+                <h3>Members</h3>
+                <p id="member-count">...</p>
+            </div>
         </div>
-        <div class="site-footer">
-          <span><a href="../">Back to home</a></span>
-        </div>
+        <p style="margin-top: 2rem;">
+            <a id="group-link" href="#" target="_blank" rel="noopener noreferrer" class="button">Join The Group on Roblox</a>
+        </p>
       </section>
     </main>
     <footer class="site-footer-persistent">
-      <span>© 2026 ReBuilted Games</span>
-      <span><a href="../">Home</a> · <a href="../about/">About</a> · <a href="../community/">Community</a> · <a href="../games/">Games</a> · <a href="../pageexample/">Example</a></span>
+      <span>© 2024 ReBuilted Games</span>
+      <span><a href="/">Home</a> · <a href="/about/">About</a> · <a href="/community/">Community</a> · <a href="/games/">Games</a></span>
     </footer>
+    <script src="../script.js"></script>
   </body>
 </html>

@@ -38,10 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function populatePage(data) {
     // Group Info
-    document.getElementById('group-name').textContent = data.name;
-    document.getElementById('group-owner').textContent = `Owned by ${data.owner.displayName} (@${data.owner.name})`;
-    // The description can contain newlines, which we replace with <br> for proper HTML display.
-    document.getElementById('group-description').innerHTML = data.description.replace(/\n/g, '<br>');
-    document.getElementById('member-count').textContent = data.memberCount.toLocaleString();
-    document.getElementById('group-link').href = `https://www.roblox.com/groups/${data.id}`;
+    // These elements only exist on the about page now
+    const groupName = document.getElementById('group-name');
+    if (groupName) groupName.textContent = data.name;
+    
+    const groupOwner = document.getElementById('group-owner');
+    if (groupOwner) groupOwner.textContent = `Owned by ${data.owner.displayName} (@${data.owner.name})`;
+    
+    const groupDesc = document.getElementById('group-description');
+    if (groupDesc) groupDesc.innerHTML = data.description.replace(/\n/g, '<br>');
+
+    const memberCount = document.getElementById('member-count');
+    if (memberCount) memberCount.textContent = data.memberCount.toLocaleString();
+
+    const groupLink = document.getElementById('group-link');
+    if (groupLink) groupLink.href = `https://www.roblox.com/groups/${data.id}`;
 }
