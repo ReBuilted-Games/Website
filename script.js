@@ -17,11 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     ]).then(([groupData, iconData]) => {
         populatePage(groupData, iconData);
+        // Swap visibility from skeleton to real content
+        const skeleton = document.getElementById('skeleton-loader');
+        const realContent = document.getElementById('real-content');
+        if (skeleton) skeleton.style.display = 'none';
+        if (realContent) realContent.style.display = 'block';
     }).catch(error => {
         console.error('Error fetching group data:', error);
         const panel = document.querySelector('.panel');
         if (panel) {
-            panel.innerHTML = `<div class="alert error">Could not load group information. The Roblox API might be down.</div>`;
+            // Hide skeleton on error and show message
+            const skeleton = document.getElementById('skeleton-loader');
+            if (skeleton) skeleton.style.display = 'none';
+            panel.insertAdjacentHTML('afterbegin', `<div class="alert error">Could not load group information. The Roblox API might be down.</div>`);
         }
     });
 });

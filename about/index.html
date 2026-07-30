@@ -30,17 +30,40 @@
         </nav>
       </header>
       <main class="panel">
-        <div class="group-header">
-          <img id="group-icon" class="group-icon" alt="Group Icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-          <div class="group-details">
-            <h1 id="group-name">Loading...</h1>
-            <p class="lead" id="group-owner">...</p>
-            <div class="pill-row">
-              <span class="pill">Members: <b id="member-count">...</b></span>
+        <!-- SKELETON LOADER -->
+        <div id="skeleton-loader">
+            <div class="group-header">
+                <div class="group-icon skeleton"></div>
+                <div class="group-details">
+                    <div class="skeleton" style="width: 60%; height: 2.8rem; margin-bottom: 1rem;"></div>
+                    <div class="skeleton" style="width: 40%; height: 1.1rem;"></div>
+                    <div class="pill-row" style="margin-top: 0.5rem;">
+                        <div class="skeleton" style="width: 120px; height: 35px; border-radius: 20px;"></div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="lead" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text" style="width: 90%;"></div>
+                <div class="skeleton skeleton-text" style="width: 80%;"></div>
+            </div>
         </div>
-        <p id="group-description" class="lead" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem;">Loading group description...</p>
+
+        <!-- REAL CONTENT (hidden initially) -->
+        <div id="real-content" style="display: none;">
+            <div class="group-header">
+              <img id="group-icon" class="group-icon" alt="Group Icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+              <div class="group-details">
+                <h1 id="group-name"></h1>
+                <p class="lead" id="group-owner"></p>
+                <div class="pill-row">
+                  <span class="pill">Members: <b id="member-count"></b></span>
+                </div>
+              </div>
+            </div>
+            <p id="group-description" class="lead" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem;"></p>
+        </div>
+
         <div class="action-row">
           <a id="group-link" href="#" target="_blank" rel="noopener noreferrer" class="button">Join The Group on Roblox</a>
         </div>
