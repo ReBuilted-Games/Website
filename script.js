@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // In a real scenario, this URL would point to a live API endpoint.
-    // For this project, we're using the local JSON file.
-    const dataUrl = './data/group.json';
+    // This is the public Roblox API endpoint for group details.
+    // We use a proxy (roproxy.com) to avoid browser CORS errors.
+    const groupId = 223811537; // Your group ID
+    const apiUrl = `https://groups.roproxy.com/v1/groups/${groupId}`;
 
-    fetch(dataUrl)
+    fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
+            // The API gives us the live group data.
             return response.json();
         })
         .then(data => {
@@ -23,44 +25,24 @@ function populatePage(data) {
     // Group Info
     document.getElementById('group-name').textContent = data.name;
     document.getElementById('group-owner').textContent = `Owned by ${data.owner.username}`;
-    document.getElementById('group-description').textContent = data.description;
+    // The description can contain newlines, which we replace with <br> for proper HTML display.
+    document.getElementById('group-description').innerHTML = data.description.replace(/\n/g, '<br>');
     document.getElementById('member-count').textContent = data.memberCount.toLocaleString();
-    document.getElementById('group-link').href = data.groupLink;
+    document.getElementById('group-link').href = `https://www.roblox.com/groups/${data.id}`;
 
-    // Announcements
+    // The "shout" is the main group announcement.
     const announcementsList = document.getElementById('announcements-list');
     announcementsList.innerHTML = ''; // Clear any placeholder content
-    data.announcements.forEach(announcement => {
+
+    // The API includes a 'shout' object for the latest announcement.
+    if (data.shout) {
         const item = document.createElement('div');
         item.className = 'card-item';
         item.innerHTML = `
-            <h3>${announcement.title}</h3>
-            <p class="meta">${announcement.date}</p>
-            <p>${announcement.summary}</p>
+            <h3>Latest Announcement</h3>
+            <p class="meta">Posted by ${data.shout.poster.username} on ${new Date(data.shout.updated).toLocaleDateString()}</p>
+            <p>${data.shout.body}</p>
         `;
         announcementsList.appendChild(item);
-    });
-
-    // Gallery
-    const galleryGrid = document.getElementById('gallery-grid');
-    galleryGrid.innerHTML = '';
-    data.gallery.forEach(imageUrl => {
-        const img = document.createElement('img');
-        img.src = imageUrl;
-        img.alt = 'Group Gallery Image';
-        galleryGrid.appendChild(img);
-    });
-
-    // Forum Threads
-    const forumThreads = document.getElementById('forum-threads');
-    forumThreads.innerHTML = '';
-    data.forumThreads.forEach(thread => {
-        const item = document.createElement('div');
-        item.className = 'card-item';
-        item.innerHTML = `
-            <h3><a href="${thread.link}" target="_blank" rel="noopener noreferrer">${thread.title}</a></h3>
-            <p class="meta">${thread.comments}</p>
-        `;
-        forumThreads.appendChild(item);
-    });
+    }
 }
