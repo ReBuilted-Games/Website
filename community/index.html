@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReBuilted Games - Community</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <main class="hero container">
@@ -12,49 +13,30 @@
         <div class="brand">
           <div class="brand-badge">RG</div>
           <div>
-            <div class="brand-title">Community</div>
-            <div class="brand-caption">A polished page for your community features.</div>
+            <div class="brand-title">ReBuilted Games</div>
+            <div class="brand-caption">Community Hub</div>
           </div>
         </div>
-        <input type="checkbox" id="navToggle" class="nav-checkbox" />
-        <label for="navToggle" class="nav-toggle">
-          Menu
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </label>
         <nav class="site-nav">
           <a href="../">Home</a>
           <a href="../about/">About</a>
-          <a href="../games/">Games</a>
-          <a href="../pageexample/">Example</a>
-          <a href="../PrivacyPolicy/">Privacy</a>
-          <a href="../TermsOfService/">Terms</a>
+          <a href="/community/">Community</a>
         </nav>
       </header>
       <section class="panel">
         <h1 class="page-title">Community</h1>
-        <p class="lead">A central place for group discussion, events, and forums — built for Roblox members who want to stay updated.</p>
-        <div class="section-grid">
-          <div class="mini-card">
-            <h3>Events</h3>
-            <p>Track group build nights, map launches, and other Roblox community events.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Forums</h3>
-            <p>Discuss game ideas, recruitment, and feedback with fellow players.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Member support</h3>
-            <p>Find links to group rules, staff applications, and support resources.</p>
-          </div>
+        <p class="lead">Stay up to date with the latest announcements and discussions from the group.</p>
+        
+        <div id="announcements-list" class="card-list" style="margin-top: 2rem;">
+            <p>Loading announcements...</p>
         </div>
-        <div class="site-footer">
-          <span><a href="../">Back to home</a></span>
-        </div>
+
       </section>
     </main>
     <footer class="site-footer-persistent">
       <span>© 2026 ReBuilted Games</span>
       <span><a href="../">Home</a> · <a href="../about/">About</a> · <a href="../community/">Community</a> · <a href="../games/">Games</a> · <a href="../pageexample/">Example</a></span>
     </footer>
+    <script src="community.js"></script>
   </body>
 </html>
