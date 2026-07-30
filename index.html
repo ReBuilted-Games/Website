@@ -1,324 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ReBuilted Games — a polished Roblox community hub with live group info and sign-in features." />
-    <title>ReBuilted Games</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="hero container">
-      <header class="site-header">
-        <div class="brand">
-          <div class="brand-badge">RG</div>
-          <div>
-            <div class="brand-title">ReBuilted Games</div>
-            <div class="brand-caption">Official Roblox group hub for players and builders.</div>
-          </div>
-        </div>
-        <input type="checkbox" id="navToggle" class="nav-checkbox" />
-        <label for="navToggle" class="nav-toggle">
-          Menu
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </label>
-        <nav class="site-nav">
-          <a href="./">Home</a>
-          <a href="about/">About</a>
-          <a href="community/">Community</a>
-          <a href="games/">Games</a>
-          <a href="pageexample/">Example</a>
-          <a class="btn secondary" href="https://www.roblox.com/communities/223811537/ReBuilted-Games" target="_blank" rel="noreferrer">Join group</a>
-          <button id="loginBtn" class="btn">Connect Roblox</button>
-        </nav>
-      </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReBuilted Games - Group</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-      <section class="hero-grid">
-        <div class="panel">
-          <div class="hero-tag">Roblox group hub · secure sign-in · fast load</div>
-          <div class="group-header">
-            <img id="groupIcon" class="group-icon" src="https://via.placeholder.com/150?text=Group" alt="ReBuilted Games icon" />
-            <div class="group-details">
-              <div class="group-label">Official group</div>
-              <h1 id="groupName">ReBuilted Games</h1>
-              <p class="lead" id="groupDescription">Loading group details and community status…</p>
-            </div>
-          </div>
-          <div class="pill-row">
-            <span class="pill" id="memberCount">Loading members…</span>
-            <span class="pill" id="ownerName">Owner: loading…</span>
-            <span class="pill">Live Roblox sign-in</span>
-          </div>
-          <div id="statusBanner" class="status-banner info" role="status">Loading Roblox connection status…</div>
-          <div class="section-grid">
-            <div class="mini-card">
-              <h3>Community first</h3>
-              <p>Stay informed with the latest group activity and member count in a polished interface.</p>
-            </div>
-            <div class="mini-card">
-              <h3>Instant sign-in</h3>
-              <p>Authenticate with Roblox and see your display name and profile image on the page.</p>
-            </div>
-            <div class="mini-card">
-              <h3>Fast load</h3>
-              <p>The site is built with lightweight static pages and smart client-side connections.</p>
-            </div>
-          </div>
-          <div class="site-footer">
-            <span><a href="TermsOfService/">Terms of Service</a> • <a href="PrivacyPolicy/">Privacy Policy</a></span>
-            <span><a href="pageexample/">View example page</a></span>
-          </div>
+    <header>
+        <div class="container">
+            <h1 id="group-name"></h1>
+            <p id="group-owner"></p>
         </div>
-      </section>
+    </header>
 
-      <section class="content-grid">
-        <div class="panel announcements-panel">
-          <h2>Latest group announcements</h2>
-          <ul id="announcementList" class="announcement-list"></ul>
-        </div>
-        <div class="panel gallery-panel">
-          <h2>Group gallery</h2>
-          <div id="groupGallery" class="gallery-grid"></div>
-        </div>
-        <div class="panel forum-panel">
-          <h2>Popular forum threads</h2>
-          <ul id="forumThreads" class="forum-list"></ul>
-        </div>
-      </section>
+    <main class="container">
+        <section id="about">
+            <div class="card">
+                <h2>About Us</h2>
+                <p id="group-description"></p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>Members</h3>
+                        <p id="member-count">...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <section class="hero-grid">
-        <div class="panel profile-card">
-          <div id="loggedOutState" class="profile-frame">
-            <div>
-              <h2 style="margin: 0;">Sign in with Roblox</h2>
-              <p class="profile-meta">Connect your Roblox account to display your avatar and username instantly.</p>
+        <section id="announcements">
+            <h2>Latest Announcements</h2>
+            <div id="announcements-list" class="card-list">
+                <!-- Announcements will be loaded here by JavaScript -->
             </div>
-            <button id="loginBtnAlt" class="btn">Continue with Roblox</button>
-          </div>
-          <div id="loggedInState" class="hidden profile-frame">
-            <div style="display:flex;align-items:center;gap:16px;">
-              <img id="avatar" class="avatar" alt="Roblox avatar" />
-              <div>
-                <h2 id="displayName" style="margin: 0 0 6px;">Guest</h2>
-                <div id="username" class="profile-meta">@unknown</div>
-              </div>
+        </section>
+
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div id="gallery-grid">
+                <!-- Gallery images will be loaded here by JavaScript -->
             </div>
-            <p class="profile-meta">Your Roblox public profile is shown here while you are signed in.</p>
-            <button id="logoutBtn" class="btn secondary">Sign out</button>
-          </div>
-          <div id="savedUsers" class="saved-users hidden">
-            <h3>Saved connected users</h3>
-            <ul id="savedUserList" class="saved-user-list"></ul>
-          </div>
-        </div>
-      </section>
+        </section>
+
+        <section id="forum">
+            <h2>Active Forum Threads</h2>
+            <div id="forum-threads" class="card-list">
+                <!-- Forum threads will be loaded here by JavaScript -->
+            </div>
+        </section>
     </main>
-    <footer class="site-footer-persistent">
-      <span>© 2026 ReBuilted Games</span>
-      <span><a href="./">Home</a> · <a href="about/">About</a> · <a href="community/">Community</a> · <a href="games/">Games</a> · <a href="pageexample/">Example</a></span>
+
+    <footer>
+        <a id="group-link" href="#" target="_blank" rel="noopener noreferrer">Join The Group on Roblox</a>
     </footer>
 
-    <script>
-      const GROUP_ID = 223811537;
-      const CLIENT_ID = '3577278600546537607';
-      const SCOPES = 'openid profile';
-      const STATE_KEY = 'rbx_oauth_state';
-
-      function getRedirectUri() {
-        const path = window.location.pathname.replace(/index\.html$/, '');
-        return `${window.location.origin}${path}redirect/`;
-      }
-
-      async function loadGroupData() {
-        try {
-          const res = await fetch('./data/group.json');
-          if (!res.ok) throw new Error('Request failed');
-          const data = await res.json();
-          document.getElementById('groupName').textContent = data.name || 'ReBuilted Games';
-          document.getElementById('groupDescription').textContent = (data.description || 'We recreate games and more.').replace(/\n/g, ' ').trim();
-          document.getElementById('memberCount').textContent = `${data.memberCount || '0'} members`;
-          document.getElementById('ownerName').textContent = `Owner: ${data.owner?.username || 'unknown'}`;
-          renderGroupExtras(data);
-          loadGroupIcon(data.id);
-        } catch (error) {
-          document.getElementById('groupDescription').textContent = 'We recreate games and more.';
-          document.getElementById('memberCount').textContent = 'Members unavailable';
-          document.getElementById('ownerName').textContent = 'Owner: unavailable';
-          document.getElementById('statusBanner').textContent = 'Unable to load group details.';
-          document.getElementById('statusBanner').className = 'status-banner error';
-        }
-      }
-
-      function renderGroupExtras(data) {
-        const announcementList = document.getElementById('announcementList');
-        const gallery = document.getElementById('groupGallery');
-        const forumThreads = document.getElementById('forumThreads');
-
-        announcementList.innerHTML = data.announcements?.map(item => `
-          <li class="announcement-item">
-            <div class="announcement-date">${item.date}</div>
-            <h3>${item.title}</h3>
-            <p>${item.summary}</p>
-          </li>
-        `).join('') || '<li class="announcement-item"><p>No announcements available.</p></li>';
-
-        gallery.innerHTML = data.gallery?.map(src => `<img src="${src}" alt="Group image" />`).join('') || '<div class="announcement-item"><p>No gallery images available.</p></div>';
-
-        forumThreads.innerHTML = data.forumThreads?.map(item => `
-          <li class="forum-item">
-            <h3><a href="${item.link}" target="_blank" rel="noreferrer">${item.title}</a></h3>
-            <p>${item.comments}</p>
-          </li>
-        `).join('') || '<li class="forum-item"><p>No forum threads available.</p></li>';
-      }
-
-      function getState() {
-        const active = sessionStorage.getItem('rbx_profile');
-        if (active) return JSON.parse(active);
-        const lastSaved = localStorage.getItem('rbx_last_profile');
-        return lastSaved ? JSON.parse(lastSaved) : null;
-      }
-
-      function saveProfileLocally(profile) {
-        if (!profile || !profile.username) return;
-        const lastProfile = JSON.stringify(profile);
-        sessionStorage.setItem('rbx_profile', lastProfile);
-        localStorage.setItem('rbx_last_profile', lastProfile);
-
-        const saved = JSON.parse(localStorage.getItem('rbx_saved_profiles') || '[]');
-        const exists = saved.find((item) => item.username === profile.username);
-        if (!exists) {
-          saved.unshift(profile);
-          if (saved.length > 8) saved.pop();
-          localStorage.setItem('rbx_saved_profiles', JSON.stringify(saved));
-        }
-        renderSavedUsers();
-      }
-
-      function renderSavedUsers() {
-        const saved = JSON.parse(localStorage.getItem('rbx_saved_profiles') || '[]');
-        const savedUsers = document.getElementById('savedUsers');
-        const savedUserList = document.getElementById('savedUserList');
-
-        if (!saved.length) {
-          savedUsers.classList.add('hidden');
-          savedUserList.innerHTML = '';
-          return;
-        }
-
-        savedUsers.classList.remove('hidden');
-        savedUserList.innerHTML = saved.map((item) => `
-          <li class="saved-user-item">
-            <img class="saved-user-avatar" src="${item.avatarUrl}" alt="${item.username} avatar" />
-            <div>
-              <div class="saved-user-name">${item.displayName || item.username}</div>
-              <div class="saved-user-meta">@${item.username}</div>
-            </div>
-          </li>
-        `).join('');
-      }
-
-      function setStatus(message, type = 'info') {
-        const banner = document.getElementById('statusBanner');
-        if (!banner) return;
-        banner.textContent = message;
-        banner.className = `status-banner ${type}`.trim();
-      }
-
-      async function loadGroupIcon(groupId) {
-        const icon = document.getElementById('groupIcon');
-        try {
-          const response = await fetch(`https://thumbnails.roblox.com/v1/groups/icons?groupIds=${groupId}&size=150x150&format=Png&isCircular=false`);
-          const data = await response.json();
-          const thumb = data.data?.[0]?.imageUrl;
-          if (thumb) {
-            icon.src = thumb;
-          }
-        } catch {
-          // leave the placeholder icon if the fetch fails
-        }
-      }
-
-      function clearProfileError() {
-        const error = sessionStorage.getItem('rbx_auth_error');
-        if (!error) return;
-        sessionStorage.removeItem('rbx_auth_error');
-      }
-
-      function renderProfile(profile) {
-        const loggedOut = document.getElementById('loggedOutState');
-        const loggedIn = document.getElementById('loggedInState');
-        if (!profile) {
-          loggedOut.classList.remove('hidden');
-          loggedIn.classList.add('hidden');
-          setStatus('Connect your Roblox account to verify your identity and show your profile here.', 'info');
-          return;
-        }
-        loggedOut.classList.add('hidden');
-        loggedIn.classList.remove('hidden');
-        document.getElementById('avatar').src = profile.avatarUrl || 'https://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&userId=1';
-        document.getElementById('displayName').textContent = profile.displayName || profile.username || 'Roblox User';
-        document.getElementById('username').textContent = `@${profile.username || 'unknown'}`;
-        setStatus(`Signed in as ${profile.displayName || profile.username || 'a Roblox user'}.`, 'success');
-        saveProfileLocally(profile);
-      }
-
-      function showAuthError() {
-        const error = sessionStorage.getItem('rbx_auth_error');
-        if (!error) return;
-        setStatus(error, 'error');
-        sessionStorage.removeItem('rbx_auth_error');
-      }
-
-      function startAuth() {
-        const state = crypto.randomUUID();
-        const redirectUri = getRedirectUri();
-        sessionStorage.setItem(STATE_KEY, state);
-        sessionStorage.setItem('rbx_redirect_uri', redirectUri);
-        const params = new URLSearchParams({
-          client_id: CLIENT_ID,
-          response_type: 'code',
-          redirect_uri: redirectUri,
-          scope: SCOPES,
-          state
-        });
-        window.location.href = `https://apis.roblox.com/oauth/v1/authorize?${params.toString()}`;
-      }
-
-      async function handleAuthCallback() {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
-        const state = params.get('state');
-        const savedState = sessionStorage.getItem(STATE_KEY);
-        if (!code || !state || state !== savedState) return;
-
-        try {
-          const redirectUrl = new URL('./redirect/', window.location.href);
-          redirectUrl.searchParams.set('code', code);
-          redirectUrl.searchParams.set('state', state);
-          sessionStorage.setItem('rbx_pending_code', code);
-          sessionStorage.setItem('rbx_pending_state', state);
-          window.location.assign(redirectUrl.toString());
-        } catch (error) {
-          console.error(error);
-          setStatus('Roblox login could not be completed.', 'error');
-        }
-      }
-
-      document.getElementById('loginBtn').addEventListener('click', startAuth);
-      document.getElementById('loginBtnAlt').addEventListener('click', startAuth);
-      document.getElementById('logoutBtn').addEventListener('click', () => {
-        sessionStorage.removeItem('rbx_profile');
-        sessionStorage.removeItem('rbx_auth_error');
-        renderProfile(null);
-      });
-
-      loadGroupData();
-      renderSavedUsers();
-      renderProfile(getState());
-      showAuthError();
-      clearProfileError();
-      handleAuthCallback();
-    </script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
