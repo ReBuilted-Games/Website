@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReBuilted Games - Games</title>
     <link rel="stylesheet" href="../styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <main class="hero container">
+    <div class="container">
       <header class="site-header">
-        <div class="brand">
+        <a href="../" class="brand">
           <div class="brand-badge">RG</div>
           <div>
-            <div class="brand-title">Games</div>
-            <div class="brand-caption">A strong page for showcasing your game offerings.</div>
+            <div class="brand-title">ReBuilted Games</div>
+            <div class="brand-caption">Our Games</div>
           </div>
-        </div>
+        </a>
         <input type="checkbox" id="navToggle" class="nav-checkbox" />
         <label for="navToggle" class="nav-toggle">
           Menu
@@ -25,36 +26,28 @@
           <a href="../">Home</a>
           <a href="../about/">About</a>
           <a href="../community/">Community</a>
+          <a href="./">Games</a>
           <a href="../pageexample/">Example</a>
-          <a href="../PrivacyPolicy/">Privacy</a>
-          <a href="../TermsOfService/">Terms</a>
+          <a href="https://authorize.roblox.com/?client_id=3577278600546537607&response_type=code&redirect_uri=https%3A%2F%2FYOUR_BACKEND_SERVER%2Fcallback&scope=openid+profile" class="button secondary">Sign In</a>
         </nav>
       </header>
-      <section class="panel">
-        <h1 class="page-title">Games</h1>
-        <p class="lead">Showcase your Roblox experiences, top games, and group-built creations in a dedicated page.</p>
-        <div class="section-grid">
-          <div class="mini-card">
-            <h3>Featured builds</h3>
-            <p>Highlight the group’s most popular game recreations and newest levels.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Play now</h3>
-            <p>Provide direct links for players to join your Roblox experience.</p>
-          </div>
-          <div class="mini-card">
-            <h3>Creator tools</h3>
-            <p>Share group development tips and status updates for builders.</p>
-          </div>
+      <main class="panel">
+        <h1 class="page-title">Group Games</h1>
+        <p class="lead">All games created and developed by the ReBuilted Games group.</p>
+        
+        <div id="games-grid" class="games-grid">
+            <!-- Skeleton Loader -->
+            <div class="game-card skeleton" style="height: 275px;"></div>
+            <div class="game-card skeleton" style="height: 275px;"></div>
+            <div class="game-card skeleton" style="height: 275px;"></div>
+            <div class="game-card skeleton" style="height: 275px;"></div>
         </div>
-        <div class="site-footer">
-          <span><a href="../">Back to home</a></span>
-        </div>
-      </section>
-    </main>
+      </main>
+    </div>
     <footer class="site-footer-persistent">
-      <span>© 2026 ReBuilted Games</span>
-      <span><a href="../">Home</a> · <a href="../about/">About</a> · <a href="../community/">Community</a> · <a href="../games/">Games</a> · <a href="../pageexample/">Example</a></span>
+      <span>© 2024 ReBuilted Games</span>
+      <span><a href="../">Home</a> · <a href="../about/">About</a> · <a href="../community/">Community</a> · <a href="./">Games</a></span>
     </footer>
+    <script src="games.js"></script>
   </body>
 </html>

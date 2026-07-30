@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (data.shout) {
                     const item = document.createElement('li');
-                    item.className = 'announcement-item';
+                    item.className = 'announcement-item fade-in';
                     item.innerHTML = `
                         <span class="announcement-date">${new Date(data.shout.updated).toLocaleDateString()}</span>
                         <h3>Posted by ${data.shout.poster.displayName} (@${data.shout.poster.username})</h3>

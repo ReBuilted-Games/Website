@@ -238,6 +238,61 @@ img {
   font-weight: 500;
 }
 
+/* --- Games Page --- */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.game-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), var(--shadow-glow);
+}
+
+.game-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.game-thumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: rgba(148, 163, 184, 0.1);
+}
+
+.game-info {
+  padding: 16px;
+}
+
+.game-name {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 8px;
+}
+
+.game-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+
 /* --- Skeleton Loader --- */
 .skeleton {
   opacity: 0.7;
@@ -260,6 +315,25 @@ img {
   100% {
     background-color: rgba(148, 163, 184, 0.25);
   }
+}
+
+/* --- General Animations & Polish --- */
+.feature-card, .announcement-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover, .announcement-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 /* --- General Layout & Components --- */
@@ -334,6 +408,18 @@ img {
 .button:hover {
   transform: translateY(-1px);
   box-shadow: 0 0 50px rgba(0, 209, 255, 0.3);
+}
+
+.button.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.button.secondary:hover {
+  background: rgba(148, 163, 184, 0.1);
+  transform: none;
+  box-shadow: none;
 }
 
 .site-footer-persistent {

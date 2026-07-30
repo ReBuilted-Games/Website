@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const skeleton = document.getElementById('skeleton-loader');
         const realContent = document.getElementById('real-content');
         if (skeleton) skeleton.style.display = 'none';
-        if (realContent) realContent.style.display = 'block';
+        if (realContent) {
+            realContent.style.display = 'block';
+            realContent.classList.add('fade-in');
+        }
     }).catch(error => {
         console.error('Error fetching group data:', error);
         const panel = document.querySelector('.panel');
