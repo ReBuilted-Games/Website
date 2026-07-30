@@ -372,6 +372,33 @@ img {
   font-weight: 500;
 }
 
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.social-pill:hover {
+  background: rgba(148, 163, 184, 0.2);
+  color: white;
+}
+
+.social-pill svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.pill-row {
+  align-items: center;
+}
+
 .alert {
   border-radius: 16px;
   padding: 14px 16px;
