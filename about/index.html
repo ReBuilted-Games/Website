@@ -4,42 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About ReBuilted Games</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       <header class="site-header">
-        <a href="/" class="brand">
+        <a href="../" class="brand">
           <div class="brand-badge">RG</div>
           <div>
             <div class="brand-title">ReBuilted Games</div>
             <div class="brand-caption">About the Group</div>
           </div>
         </a>
-        <input type="checkbox" id="navToggle" class="nav-checkbox" />
-        <label for="navToggle" class="nav-toggle">
-          Menu
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </label>
         <nav class="site-nav">
           <a href="../">Home</a>
           <a href="./">About</a>
           <a href="../community/">Community</a>
           <a href="../games/">Games</a>
-          <a href="../pageexample/">Example</a>
         </nav>
       </header>
       <main class="panel">
         <div class="group-header">
-          <img id="group-icon" class="group-icon" alt="Group Icon" />
+          <img id="group-icon" class="group-icon" alt="Group Icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           <div class="group-details">
             <h1 id="group-name">Loading...</h1>
             <p class="lead" id="group-owner">...</p>
-            <div class="pill-row"><span class="pill">Members: <b id="member-count">...</b></span></div>
+            <div class="pill-row">
+              <span class="pill">Members: <b id="member-count">...</b></span>
+            </div>
           </div>
         </div>
-        <p id="group-description" class="lead" style="margin-top: 1.5rem;">Loading group description...</p>
+        <p id="group-description" class="lead" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem;">Loading group description...</p>
         <div class="action-row">
           <a id="group-link" href="#" target="_blank" rel="noopener noreferrer" class="button">Join The Group on Roblox</a>
         </div>
@@ -47,7 +43,6 @@
     </div>
     <footer class="site-footer-persistent">
       <span>© 2024 ReBuilted Games</span>
-      <span><a href="../">Home</a> · <a href="./">About</a> · <a href="../community/">Community</a> · <a href="../games/">Games</a></span>
     </footer>
     <script src="../script.js"></script>
   </body>
